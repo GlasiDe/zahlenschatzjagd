@@ -1,0 +1,22 @@
+Zahlenschatzjagd ist eine Lern-App für die Klassen 1 und 2, mit der Kinder allein Mathe üben. Sie richtet sich auch an Kinder, die noch nicht sicher lesen: Die App öffnet auf einer Schatzkarte, und das Maskottchen Ella liest vor, was das Kind antippt.
+
+Übungsformen:
+• Grundrechenarten – Plus, Minus, Mal und Geteilt im Zahlenraum bis 10, 20, 50 oder 100
+• Verdoppeln – mit Auswahl-Antworten oder mit dem Ziffernblock
+• Zahlenmauer – in vier Stufen, in der höchsten wird rückwärts gerechnet
+• Verliebte Zahlen – Zerlegung der 10, mit oder ohne Münzen als Hilfe
+• Zahlen vergleichen – kleiner, gleich oder größer
+• Nachbarzahlen – die Zahl davor und danach finden
+
+Die Aufgaben folgen dem Lehrplan Mathematik für die Grundschule in Nordrhein-Westfalen. Für fleißiges Üben füllt sich je Übung eine Schatztruhe, von Bronze bis Platin.
+
+Für Eltern, hinter einer kleinen Rechenaufgabe oder einer PIN:
+• Übungsstand: was ein Kind zuletzt geübt hat und wie sicher es sitzt
+• Übungskalender: wann und wie lange geübt wurde
+• Freigabe: was ein Kind üben darf
+• Ton und Vorlesen abschalten
+• Sicherung des Fortschritts als Datei, für den Wechsel auf ein neues Gerät
+
+Mehrere Geschwister teilen sich ein Gerät, jedes mit eigenem Profil und eigenem Fortschritt.
+
+Datenschutz: Die App verlangt keine einzige Berechtigung, auch nicht fürs Internet. Keine Werbung, kein Tracking, kein Konto. Alle Daten bleiben auf dem Gerät.

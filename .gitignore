@@ -1,0 +1,39 @@
+*.iml
+.gradle
+/local.properties
+/.idea/caches
+/.idea/libraries
+/.idea/modules.xml
+/.idea/workspace.xml
+/.idea/navEditor.xml
+/.idea/assetWizardSettings.xml
+/.idea/deploymentTargetSelector.xml
+.DS_Store
+/build
+/captures
+.externalNativeBuild
+.cxx
+local.properties
+
+# Arbeitsverzeichnis des Kotlin-Compilers (Sitzungsdateien, Build-Artefakt)
+.kotlin/
+
+# Persoenliche Claude-Code-Einstellungen
+.claude/settings.local.json
+
+# Projektlokale MCP-Server-Konfiguration: enthaelt maschinenspezifische absolute Pfade
+.mcp.json
+
+# Claude-Code-Hooks: die Skripte selbst sind versioniert, denn sie sind Projekt-Mechanik
+# (gradlew, Branch main, detekt) und CLAUDE.md sagt zu, dass es sie gibt. Ihr einziger
+# maschinenspezifischer Pfad (ein optionales lokales Werkzeug) ist aus $env:USERPROFILE
+# gebaut und abgesichert -- anders als die echten absoluten Pfade in .mcp.json.
+# Ignoriert bleiben allein die Laufzeit-Marker, die zwischen den Hooks hin und her gehen.
+.claude/hooks/.pending-check
+.claude/hooks/.fired
+
+# Release-Signing: Keystore und Zugangsdaten sind Geheimnisse, gehoeren nicht ins Repo
+/keystore/
+/keystore.properties
+/releases/
+/screenshots/

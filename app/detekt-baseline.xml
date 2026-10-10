@@ -1,0 +1,243 @@
+<?xml version="1.0" ?>
+<SmellBaseline>
+  <ManuallySuppressedIssues></ManuallySuppressedIssues>
+  <CurrentIssues>
+    <ID>CyclomaticComplexMethod:GameLogic.kt$fun createTask( types: List&lt;String&gt;, range: Int, random: Random = Random.Default, multipleChoice: Boolean = false, showCoins: Boolean = false, ): Task</ID>
+    <ID>CyclomaticComplexMethod:GameScreen.kt$@Composable fun GameScreen( viewModel: GameViewModel, onFinish: (Int, List&lt;UnlockedBadge&gt;) -&gt; Unit, onCancel: () -&gt; Unit, // Parameter für den Abbrechen-Button )</ID>
+    <ID>CyclomaticComplexMethod:ZahlenschatzjagdNavHost.kt$@Composable fun ZahlenschatzjagdNavHost()</ID>
+    <ID>ForEachOnRange:GameScreen.kt$0 until target step 5</ID>
+    <ID>FunctionNaming:AdultGate.kt$@Composable fun AdultGate( onPass: () -&gt; Unit, onCancel: () -&gt; Unit, )</ID>
+    <ID>FunctionNaming:Avatars.kt$@Composable fun AvatarImage( avatarId: String, size: Dp, modifier: Modifier = Modifier, )</ID>
+    <ID>FunctionNaming:BackupScreen.kt$@Composable fun BackupScreen(viewModel: BackupViewModel, onBack: () -&gt; Unit)</ID>
+    <ID>FunctionNaming:BackupScreen.kt$@Composable private fun BackupSection(busy: Boolean, onExport: () -&gt; Unit, onImport: () -&gt; Unit)</ID>
+    <ID>FunctionNaming:BackupScreen.kt$@Composable private fun RestoreConfirmDialog(onConfirm: () -&gt; Unit, onDismiss: () -&gt; Unit)</ID>
+    <ID>FunctionNaming:BadgeScreen.kt$@Composable fun BadgeScreen( viewModel: BadgeViewModel, onBack: () -&gt; Unit, )</ID>
+    <ID>FunctionNaming:BadgeScreen.kt$@Composable private fun ChestRow(cell: BadgeCell)</ID>
+    <ID>FunctionNaming:BadgeVisuals.kt$@Composable fun RewardItem( tier: BadgeTier, modifier: Modifier = Modifier, size: Dp = 96.dp, )</ID>
+    <ID>FunctionNaming:BadgeVisuals.kt$@Composable fun TreasureChest( highestTier: BadgeTier?, modifier: Modifier = Modifier, size: Dp = 128.dp, )</ID>
+    <ID>FunctionNaming:EinmaligeAusgaben.kt$@Composable fun AusstehendeAnsage(text: String?, onVorgelesen: () -&gt; Unit)</ID>
+    <ID>FunctionNaming:EinmaligeAusgaben.kt$@Composable fun AusstehenderTon(ton: GameSound?, onGespielt: () -&gt; Unit)</ID>
+    <ID>FunctionNaming:EinmaligeAusgaben.kt$@Composable fun BegruessungJeBesuch(text: String, begruessungFaellig: () -&gt; Boolean)</ID>
+    <ID>FunctionNaming:EinmaligeAusgaben.kt$@Composable fun TonBeimErstenErscheinen(ton: GameSound)</ID>
+    <ID>FunctionNaming:EinmaligeAusgaben.kt$@Composable fun VorlesenBeimErstenErscheinen(text: String)</ID>
+    <ID>FunctionNaming:FreigabeScreen.kt$@Composable fun FreigabeScreen( viewModel: FreigabeViewModel, onBack: () -&gt; Unit, )</ID>
+    <ID>FunctionNaming:FreigabeScreen.kt$@Composable private fun LeerHinweis()</ID>
+    <ID>FunctionNaming:FreigabeScreen.kt$@Composable private fun ReiterGruppe( tab: BadgeTab, freigabe: Freigabe, onSetze: (String, Boolean) -&gt; Unit, )</ID>
+    <ID>FunctionNaming:FreigabeScreen.kt$@Composable private fun Schalter( label: String, checked: Boolean, testTag: String, onCheckedChange: (Boolean) -&gt; Unit, hinweis: String? = null, eingerueckt: Boolean = false, )</ID>
+    <ID>FunctionNaming:FreigabeScreen.kt$@Composable private fun ZahlenraumAbschnitt(freigabe: Freigabe, onSetze: (Int, Boolean) -&gt; Unit)</ID>
+    <ID>FunctionNaming:GameScreen.kt$@Composable fun AnswerOptionButtons(options: List&lt;Int&gt;, onSelect: (Int) -&gt; Unit)</ID>
+    <ID>FunctionNaming:GameScreen.kt$@Composable fun CoinTenFrame(known: Int, target: Int)</ID>
+    <ID>FunctionNaming:GameScreen.kt$@Composable fun ComparisonButtons(onLess: () -&gt; Unit, onEqual: () -&gt; Unit, onGreater: () -&gt; Unit)</ID>
+    <ID>FunctionNaming:GameScreen.kt$@Composable fun GameScreen( viewModel: GameViewModel, onFinish: (Int, List&lt;UnlockedBadge&gt;) -&gt; Unit, onCancel: () -&gt; Unit, // Parameter für den Abbrechen-Button )</ID>
+    <ID>FunctionNaming:GameScreen.kt$@Composable fun NumberButton(label: String, size: Dp = 80.dp, onClick: () -&gt; Unit)</ID>
+    <ID>FunctionNaming:GameScreen.kt$@Composable private fun SymbolButton(label: String, testTag: String, onClick: () -&gt; Unit, size: Dp = 110.dp)</ID>
+    <ID>FunctionNaming:GameScreen.kt$@Composable private fun VerdoppelnPrompt(num1: Int, userInput: String)</ID>
+    <ID>FunctionNaming:HomeScreen.kt$@Composable fun HomeScreen( freigabe: Freigabe, onOpenRechnen: () -&gt; Unit, onOpenZahlenspiele: () -&gt; Unit, onOpenBadges: () -&gt; Unit, onOpenProfil: () -&gt; Unit, onOpenEltern: () -&gt; Unit, begruessungFaellig: () -&gt; Boolean, activeAvatarId: String? = null, activeName: String? = null, )</ID>
+    <ID>FunctionNaming:HomeScreen.kt$@Composable private fun HomeProfileBadge( avatarId: String, name: String, onClick: () -&gt; Unit, )</ID>
+    <ID>FunctionNaming:HomeScreen.kt$@Composable private fun IslandTile( island: Island, @DrawableRes image: Int, islandSize: Dp, tileWidth: Dp, titleFontSize: TextUnit, onClick: () -&gt; Unit, modifier: Modifier = Modifier, )</ID>
+    <ID>FunctionNaming:HomeScreen.kt$@Composable private fun MapTitle()</ID>
+    <ID>FunctionNaming:HomeScreen.kt$@Composable private fun TreasureMap( inseln: List&lt;Island&gt;, onOpenIsland: (Island) -&gt; Unit, modifier: Modifier = Modifier, )</ID>
+    <ID>FunctionNaming:ZahlenschatzjagdNavHost.kt$@Composable fun ZahlenschatzjagdNavHost()</ID>
+    <ID>FunctionNaming:NachbarzahlenFeld.kt$@Composable internal fun Feld( position: Nachbarposition, aufgabe: Nachbarzahlenaufgabe, state: NachbarzahlenUiState, groesse: Dp, onClick: () -&gt; Unit, )</ID>
+    <ID>FunctionNaming:NachbarzahlenScreen.kt$@Composable fun NachbarzahlenScreen( viewModel: NachbarzahlenViewModel, onFinish: (Int, Int, List&lt;UnlockedBadge&gt;) -&gt; Unit, onCancel: () -&gt; Unit, )</ID>
+    <ID>FunctionNaming:NachbarzahlenScreen.kt$@Composable private fun BildschirmWachHalten()</ID>
+    <ID>FunctionNaming:NachbarzahlenScreen.kt$@Composable private fun Ergebnis( state: NachbarzahlenUiState, aufgabe: Nachbarzahlenaufgabe?, onWeiter: () -&gt; Unit, )</ID>
+    <ID>FunctionNaming:NachbarzahlenScreen.kt$@Composable private fun Reihe( aufgabe: Nachbarzahlenaufgabe, state: NachbarzahlenUiState, onWaehleLuecke: (Nachbarposition) -&gt; Unit, )</ID>
+    <ID>FunctionNaming:NachbarzahlenSelectionScreen.kt$@Composable fun NachbarzahlenSelectionScreen( freigabe: Freigabe, onStartGame: (NachbarzahlenSettings) -&gt; Unit, onBack: () -&gt; Unit = {}, )</ID>
+    <ID>FunctionNaming:ParchmentBackground.kt$@Composable fun ParchmentBackground( modifier: Modifier = Modifier, content: @Composable () -&gt; Unit, )</ID>
+    <ID>FunctionNaming:ParentGateScreen.kt$@Composable fun ParentGateScreen( access: ParentAccess?, onPass: () -&gt; Unit, onResetPassed: () -&gt; Unit, onCancel: () -&gt; Unit, )</ID>
+    <ID>FunctionNaming:ParentPinGate.kt$@Composable fun ParentPinGate( access: ParentAccess, onPass: () -&gt; Unit, onResetPassed: () -&gt; Unit, onCancel: () -&gt; Unit, )</ID>
+    <ID>FunctionNaming:ParentPinGate.kt$@Composable private fun PinStep( access: ParentAccess, onPass: () -&gt; Unit, onForgotten: () -&gt; Unit, onCancel: () -&gt; Unit, )</ID>
+    <ID>FunctionNaming:ParentPinGate.kt$@Composable private fun SecurityQuestionStep( access: ParentAccess, onPassed: () -&gt; Unit, onBack: () -&gt; Unit, )</ID>
+    <ID>FunctionNaming:ParentPinSetupScreen.kt$@Composable fun ParentPinSetupScreen( existingQuestion: String?, onSave: (pin: String, question: String, answer: String) -&gt; Unit, onChangePinOnly: (pin: String) -&gt; Unit, onBack: () -&gt; Unit, )</ID>
+    <ID>FunctionNaming:ParentPinSetupScreen.kt$@Composable private fun ErrorText(error: String?)</ID>
+    <ID>FunctionNaming:ParentPinSetupScreen.kt$@Composable private fun PinField( value: String, label: String, testTag: String, onValueChange: (String) -&gt; Unit, )</ID>
+    <ID>FunctionNaming:ParentPinSetupScreen.kt$@Composable private fun PinFields( pin: String, pinRepeat: String, onPinChange: (String) -&gt; Unit, onPinRepeatChange: (String) -&gt; Unit, )</ID>
+    <ID>FunctionNaming:ParentPinSetupScreen.kt$@Composable private fun SaveButton(onClick: () -&gt; Unit)</ID>
+    <ID>FunctionNaming:ParentPinSetupScreen.kt$@Composable private fun SecurityQuestionFields( existingQuestion: String?, question: String, answer: String, onQuestionChange: (String) -&gt; Unit, onAnswerChange: (String) -&gt; Unit, )</ID>
+    <ID>FunctionNaming:ParentScreen.kt$@Composable fun ParentScreen( onOpenEntry: (ParentEntry) -&gt; Unit, onBack: () -&gt; Unit, )</ID>
+    <ID>FunctionNaming:ParentScreen.kt$@Composable internal fun Abschnitt(titel: String)</ID>
+    <ID>FunctionNaming:ParentScreen.kt$@Composable internal fun ParentPage( title: String, onBack: () -&gt; Unit, backTestTag: String, content: @Composable () -&gt; Unit, )</ID>
+    <ID>FunctionNaming:ParentScreen.kt$@Composable internal fun SchalterZeile( beschriftung: String, an: Boolean, testTag: String, onSetze: (Boolean) -&gt; Unit, erklaerung: @Composable ColumnScope.() -&gt; Unit, )</ID>
+    <ID>FunctionNaming:ParentScreen.kt$@Composable private fun EntryRow(entry: ParentEntry, onClick: () -&gt; Unit)</ID>
+    <ID>FunctionNaming:ProfilWahl.kt$@Composable internal fun ProfilWahl( namen: List&lt;String&gt;, gewaehlt: String?, testTagPrefix: String, onWaehle: (String) -&gt; Unit, )</ID>
+    <ID>FunctionNaming:ProfileScreen.kt$@Composable fun ProfileScreen( profiles: List&lt;UserProfile&gt;, activeUser: String, verwaltungErlaubt: Boolean, onSwitch: (String) -&gt; Unit, onCreate: (name: String, avatarId: String) -&gt; Unit, onRename: (oldName: String, newName: String) -&gt; Unit, onChangeAvatar: (name: String, avatarId: String) -&gt; Unit, onDelete: (name: String) -&gt; Unit, onVerwaltungAnfordern: () -&gt; Unit, onBack: () -&gt; Unit, sicherungAnbieten: Boolean = false, sicherungMeldung: BackupMessage? = null, onSicherungEinspielen: () -&gt; Unit = {}, showFirstProfileHint: Boolean = false, onDismissFirstProfileHint: () -&gt; Unit = {}, )</ID>
+    <ID>FunctionNaming:ProfileScreen.kt$@Composable private fun AvatarPicker(selectedId: String, onSelect: (String) -&gt; Unit)</ID>
+    <ID>FunctionNaming:ProfileScreen.kt$@Composable private fun AvatarPickerDialog( initialAvatarId: String, onConfirm: (avatarId: String) -&gt; Unit, onDismiss: () -&gt; Unit, )</ID>
+    <ID>FunctionNaming:ProfileScreen.kt$@Composable private fun IconAction(emoji: String, desc: String, profil: String, onClick: () -&gt; Unit)</ID>
+    <ID>FunctionNaming:ProfileScreen.kt$@Composable private fun Kopfzeile(zurueckMoeglich: Boolean, zeigeWechselhinweis: Boolean, onBack: () -&gt; Unit)</ID>
+    <ID>FunctionNaming:ProfileScreen.kt$@Composable private fun LeererHinweis(sicherungAnbieten: Boolean, verwaltungErlaubt: Boolean)</ID>
+    <ID>FunctionNaming:ProfileScreen.kt$@Composable private fun ProfileCard( profile: UserProfile, isActive: Boolean, verwaltungErlaubt: Boolean, onSelect: () -&gt; Unit, onRename: () -&gt; Unit, onChangeAvatar: () -&gt; Unit, onDelete: () -&gt; Unit, )</ID>
+    <ID>FunctionNaming:ProfileScreen.kt$@Composable private fun ProfileEditDialog( title: String, initialName: String, initialAvatarId: String, confirmLabel: String, confirmTestTag: String, forbiddenNames: List&lt;String&gt;, showAvatarPicker: Boolean = true, onConfirm: (name: String, avatarId: String) -&gt; Unit, onDismiss: () -&gt; Unit, )</ID>
+    <ID>FunctionNaming:ProfileScreen.kt$@Composable private fun SicherungAlsZweiterWeg(onSicherungEinspielen: () -&gt; Unit)</ID>
+    <ID>FunctionNaming:ProfileScreen.kt$@Composable private fun VerwaltungHinterDemTor(onVerwaltungAnfordern: () -&gt; Unit)</ID>
+    <ID>FunctionNaming:RechnenMenuScreen.kt$@Composable fun RechnenMenuScreen( freigabe: Freigabe, onOpenGrundrechenarten: () -&gt; Unit, onOpenVerdoppeln: () -&gt; Unit, onOpenZahlenmauer: () -&gt; Unit, begruessungFaellig: () -&gt; Boolean, onBack: () -&gt; Unit = {}, )</ID>
+    <ID>FunctionNaming:RechnenMenuScreen.kt$@Composable private fun GameScene( spiele: List&lt;Rechenspiel&gt;, onOpenGame: (Rechenspiel) -&gt; Unit, modifier: Modifier = Modifier, )</ID>
+    <ID>FunctionNaming:RechnenMenuScreen.kt$@Composable private fun GameTile( title: String, @DrawableRes image: Int, testTag: String, iconSize: Dp, tileWidth: Dp, titleFontSize: TextUnit, onClick: () -&gt; Unit, modifier: Modifier = Modifier, )</ID>
+    <ID>FunctionNaming:SchutzhaltScreen.kt$@Composable fun SchutzhaltScreen(schutzhalt: Datenbankstart.Schutzhalt, appVersion: String)</ID>
+    <ID>FunctionNaming:SchutzhaltScreen.kt$@Composable private fun FuerDenErwachsenen(meldung: SchutzhaltMeldung)</ID>
+    <ID>FunctionNaming:SelectionScreen.kt$@Composable fun RangeButton(label: String, value: Int, currentSelection: Int, onSelect: (Int) -&gt; Unit)</ID>
+    <ID>FunctionNaming:SelectionScreen.kt$@Composable fun SelectionScreen( freigabe: Freigabe, onStartGame: (GameSettings) -&gt; Unit, onBack: () -&gt; Unit = {}, )</ID>
+    <ID>FunctionNaming:SelectionScreen.kt$@Composable internal fun &lt;T&gt; ZweispaltigesRaster(eintraege: List&lt;T&gt;, inhalt: @Composable (T) -&gt; Unit)</ID>
+    <ID>FunctionNaming:SicherungEinspielen.kt$@Composable fun SicherungMeldung(message: BackupMessage, modifier: Modifier = Modifier)</ID>
+    <ID>FunctionNaming:StatsScreen.kt$@Composable fun StatsScreen( correct: Int, total: Int, unlockedBadges: List&lt;UnlockedBadge&gt; = emptyList(), onOpenBadges: () -&gt; Unit = {}, onPlayAgain: () -&gt; Unit, onBackToSelection: () -&gt; Unit )</ID>
+    <ID>FunctionNaming:StatsScreen.kt$@Composable private fun StarRating(stars: Int)</ID>
+    <ID>FunctionNaming:StatsScreen.kt$@OptIn(ExperimentalLayoutApi::class) @Composable private fun NewBadgesCard(badges: List&lt;UnlockedBadge&gt;, onOpenBadges: () -&gt; Unit)</ID>
+    <ID>FunctionNaming:StatsScreen.kt$@Preview(showBackground = true) @Composable fun StatsScreenPreview()</ID>
+    <ID>FunctionNaming:Theme.kt$@Composable fun ZahlenschatzjagdTheme( content: @Composable () -&gt; Unit )</ID>
+    <ID>FunctionNaming:TonUndVorlesenScreen.kt$@Composable fun TonUndVorlesenScreen( einstellung: TonUndVorlesen, onSetzeTon: (Boolean) -&gt; Unit, onSetzeVorlesen: (Boolean) -&gt; Unit, onBack: () -&gt; Unit, )</ID>
+    <ID>FunctionNaming:UebungskalenderScreen.kt$@Composable fun UebungskalenderScreen( state: UebungskalenderUiState, onWaehleProfil: (String) -&gt; Unit, onBack: () -&gt; Unit, )</ID>
+    <ID>FunctionNaming:UebungskalenderScreen.kt$@Composable private fun Bildschirmzeiten(wochen: List&lt;Kalenderwoche&gt;)</ID>
+    <ID>FunctionNaming:UebungskalenderScreen.kt$@Composable private fun GeschwisterHinweis()</ID>
+    <ID>FunctionNaming:UebungskalenderScreen.kt$@Composable private fun Punktemuster(wochen: List&lt;Kalenderwoche&gt;)</ID>
+    <ID>FunctionNaming:UebungskalenderScreen.kt$@Composable private fun TagPunkt(tag: Kalendertag, modifier: Modifier)</ID>
+    <ID>FunctionNaming:UebungskalenderScreen.kt$@Composable private fun ZeitZeile( beschriftung: String, zusatz: String?, dauer: String, modifier: Modifier = Modifier, )</ID>
+    <ID>FunctionNaming:UebungsstandScreen.kt$@Composable fun UebungsstandScreen( state: UebungsstandUiState, onWaehleProfil: (String) -&gt; Unit, onBack: () -&gt; Unit, )</ID>
+    <ID>FunctionNaming:UebungsstandScreen.kt$@Composable private fun Erklaerung(zeilen: List&lt;Uebungsstandzeile&gt;)</ID>
+    <ID>FunctionNaming:UebungsstandScreen.kt$@Composable private fun StandZeile( zeile: Uebungsstandzeile, tiefe: Int, offen: Set&lt;String&gt;, onKlappe: (String) -&gt; Unit, )</ID>
+    <ID>FunctionNaming:UebungsstandScreen.kt$@Composable private fun Zeilen(zeilen: List&lt;Uebungsstandzeile&gt;, profil: String?)</ID>
+    <ID>FunctionNaming:VerdoppelnSelectionScreen.kt$@Composable fun VerdoppelnSelectionScreen( freigabe: Freigabe, onStartGame: (GameSettings) -&gt; Unit, onBack: () -&gt; Unit = {}, )</ID>
+    <ID>FunctionNaming:VergleichenSelectionScreen.kt$@Composable fun VergleichenSelectionScreen( freigabe: Freigabe, onStartGame: (GameSettings) -&gt; Unit, onBack: () -&gt; Unit = {}, )</ID>
+    <ID>FunctionNaming:ZahlenmauerScreen.kt$@Composable fun ZahlenmauerScreen( viewModel: ZahlenmauerViewModel, onFinish: (Int, Int, List&lt;UnlockedBadge&gt;) -&gt; Unit, onCancel: () -&gt; Unit, )</ID>
+    <ID>FunctionNaming:ZahlenmauerScreen.kt$@Composable private fun ZahlenmauerCellView( cell: ZahlenmauerCell, entry: ZahlenmauerEntryState?, selected: Boolean, checked: Boolean, size: Dp = 52.dp, onClick: () -&gt; Unit, )</ID>
+    <ID>FunctionNaming:ZahlenmauerScreen.kt$@Composable private fun ZahlenmauerPyramid( wall: Zahlenmauer, entries: Map&lt;ZahlenmauerPos, ZahlenmauerEntryState&gt;, selectedPos: ZahlenmauerPos?, checked: Boolean, onSelectCell: (ZahlenmauerPos) -&gt; Unit, )</ID>
+    <ID>FunctionNaming:ZahlenmauerScreen.kt$@Composable private fun ZahlenmauerResultSection(state: ZahlenmauerUiState, onNextWall: () -&gt; Unit)</ID>
+    <ID>FunctionNaming:ZahlenmauerSelectionScreen.kt$@Composable fun ZahlenmauerSelectionScreen( freigabe: Freigabe, onStartGame: (ZahlenmauerSettings) -&gt; Unit, onBack: () -&gt; Unit = {}, )</ID>
+    <ID>FunctionNaming:ZahlenmauerSelectionScreen.kt$@Composable private fun DifficultyButton( difficulty: ZahlenmauerDifficulty, isSelected: Boolean, onSelect: () -&gt; Unit, )</ID>
+    <ID>FunctionNaming:ZahlenspieleMenuScreen.kt$@Composable fun ZahlenspieleMenuScreen( freigabe: Freigabe, onOpenVerliebte: () -&gt; Unit, onOpenVergleichen: () -&gt; Unit, onOpenNachbarzahlen: () -&gt; Unit, begruessungFaellig: () -&gt; Boolean, onBack: () -&gt; Unit = {}, )</ID>
+    <ID>FunctionNaming:ZahlenspieleMenuScreen.kt$@Composable private fun GameScene( spiele: List&lt;Zahlenspiel&gt;, onOpenGame: (Zahlenspiel) -&gt; Unit, modifier: Modifier = Modifier, )</ID>
+    <ID>FunctionNaming:ZahlenspieleMenuScreen.kt$@Composable private fun GameTile( title: String, @DrawableRes image: Int, testTag: String, iconSize: Dp, tileWidth: Dp, titleFontSize: TextUnit, onClick: () -&gt; Unit, modifier: Modifier = Modifier, )</ID>
+    <ID>FunctionNaming:ZahlenspieleSelectionScreen.kt$@Composable fun ZahlenspieleSelectionScreen( freigabe: Freigabe, onStartGame: (GameSettings) -&gt; Unit, onBack: () -&gt; Unit = {}, )</ID>
+    <ID>FunctionNaming:Ziffernblock.kt$@Composable fun AbgebenZeile(onPruefen: () -&gt; Unit)</ID>
+    <ID>FunctionNaming:Ziffernblock.kt$@Composable fun Ziffernblock( onZiffer: (String) -&gt; Unit, onLoeschen: () -&gt; Unit, onPruefen: () -&gt; Unit, zeilenAbstand: Dp = 8.dp, )</ID>
+    <ID>FunctionNaming:ZugangScreen.kt$@Composable fun ZugangScreen( zugang: ParentZugang, onManagePin: () -&gt; Unit, onRemovePin: () -&gt; Unit, onSetzeProfilwechsel: (Boolean) -&gt; Unit, onBack: () -&gt; Unit, )</ID>
+    <ID>FunctionNaming:ZugangScreen.kt$@Composable private fun PinAbschnitt(pinIsSet: Boolean, onManagePin: () -&gt; Unit, onRemovePin: () -&gt; Unit)</ID>
+    <ID>FunctionNaming:ZugangScreen.kt$@Composable private fun ProfilwechselSchalter(profilwechselOhnePin: Boolean, onSetze: (Boolean) -&gt; Unit)</ID>
+    <ID>FunctionNaming:ZugangScreen.kt$@Composable private fun RemovePinDialog(onConfirm: () -&gt; Unit, onDismiss: () -&gt; Unit)</ID>
+    <ID>LongMethod:AdultGate.kt$@Composable fun AdultGate( onPass: () -&gt; Unit, onCancel: () -&gt; Unit, )</ID>
+    <ID>LongMethod:GameLogic.kt$fun createTask( types: List&lt;String&gt;, range: Int, random: Random = Random.Default, multipleChoice: Boolean = false, showCoins: Boolean = false, ): Task</ID>
+    <ID>LongMethod:GameScreen.kt$@Composable fun GameScreen( viewModel: GameViewModel, onFinish: (Int, List&lt;UnlockedBadge&gt;) -&gt; Unit, onCancel: () -&gt; Unit, // Parameter für den Abbrechen-Button )</ID>
+    <ID>LongMethod:ZahlenschatzjagdNavHost.kt$@Composable fun ZahlenschatzjagdNavHost()</ID>
+    <ID>LongMethod:NachbarzahlenSelectionScreen.kt$@Composable fun NachbarzahlenSelectionScreen( freigabe: Freigabe, onStartGame: (NachbarzahlenSettings) -&gt; Unit, onBack: () -&gt; Unit = {}, )</ID>
+    <ID>LongMethod:ProfileScreen.kt$@Composable fun ProfileScreen( profiles: List&lt;UserProfile&gt;, activeUser: String, verwaltungErlaubt: Boolean, onSwitch: (String) -&gt; Unit, onCreate: (name: String, avatarId: String) -&gt; Unit, onRename: (oldName: String, newName: String) -&gt; Unit, onChangeAvatar: (name: String, avatarId: String) -&gt; Unit, onDelete: (name: String) -&gt; Unit, onVerwaltungAnfordern: () -&gt; Unit, onBack: () -&gt; Unit, sicherungAnbieten: Boolean = false, sicherungMeldung: BackupMessage? = null, onSicherungEinspielen: () -&gt; Unit = {}, showFirstProfileHint: Boolean = false, onDismissFirstProfileHint: () -&gt; Unit = {}, )</ID>
+    <ID>LongMethod:SelectionScreen.kt$@Composable fun SelectionScreen( freigabe: Freigabe, onStartGame: (GameSettings) -&gt; Unit, onBack: () -&gt; Unit = {}, )</ID>
+    <ID>LongMethod:StatsScreen.kt$@Composable fun StatsScreen( correct: Int, total: Int, unlockedBadges: List&lt;UnlockedBadge&gt; = emptyList(), onOpenBadges: () -&gt; Unit = {}, onPlayAgain: () -&gt; Unit, onBackToSelection: () -&gt; Unit )</ID>
+    <ID>LongMethod:VerdoppelnSelectionScreen.kt$@Composable fun VerdoppelnSelectionScreen( freigabe: Freigabe, onStartGame: (GameSettings) -&gt; Unit, onBack: () -&gt; Unit = {}, )</ID>
+    <ID>LongMethod:VergleichenSelectionScreen.kt$@Composable fun VergleichenSelectionScreen( freigabe: Freigabe, onStartGame: (GameSettings) -&gt; Unit, onBack: () -&gt; Unit = {}, )</ID>
+    <ID>LongMethod:ZahlenmauerSelectionScreen.kt$@Composable fun ZahlenmauerSelectionScreen( freigabe: Freigabe, onStartGame: (ZahlenmauerSettings) -&gt; Unit, onBack: () -&gt; Unit = {}, )</ID>
+    <ID>LongMethod:ZahlenspieleSelectionScreen.kt$@Composable fun ZahlenspieleSelectionScreen( freigabe: Freigabe, onStartGame: (GameSettings) -&gt; Unit, onBack: () -&gt; Unit = {}, )</ID>
+    <ID>LongParameterList:AdaptiveSizing.kt$( titles: List&lt;String&gt;, maxWidth: Dp, style: TextStyle, fontWeight: FontWeight? = null, minFontSize: TextUnit = 10.sp, maxFontSize: TextUnit = 18.sp, )</ID>
+    <ID>LongParameterList:FreigabeScreen.kt$( label: String, checked: Boolean, testTag: String, onCheckedChange: (Boolean) -&gt; Unit, hinweis: String? = null, eingerueckt: Boolean = false, )</ID>
+    <ID>LongParameterList:HomeScreen.kt$( freigabe: Freigabe, onOpenRechnen: () -&gt; Unit, onOpenZahlenspiele: () -&gt; Unit, onOpenBadges: () -&gt; Unit, onOpenProfil: () -&gt; Unit, onOpenEltern: () -&gt; Unit, begruessungFaellig: () -&gt; Boolean, activeAvatarId: String? = null, activeName: String? = null, )</ID>
+    <ID>LongParameterList:HomeScreen.kt$( island: Island, @DrawableRes image: Int, islandSize: Dp, tileWidth: Dp, titleFontSize: TextUnit, onClick: () -&gt; Unit, modifier: Modifier = Modifier, )</ID>
+    <ID>LongParameterList:ProfileScreen.kt$( profile: UserProfile, isActive: Boolean, verwaltungErlaubt: Boolean, onSelect: () -&gt; Unit, onRename: () -&gt; Unit, onChangeAvatar: () -&gt; Unit, onDelete: () -&gt; Unit, )</ID>
+    <ID>LongParameterList:ProfileScreen.kt$( profiles: List&lt;UserProfile&gt;, activeUser: String, verwaltungErlaubt: Boolean, onSwitch: (String) -&gt; Unit, onCreate: (name: String, avatarId: String) -&gt; Unit, onRename: (oldName: String, newName: String) -&gt; Unit, onChangeAvatar: (name: String, avatarId: String) -&gt; Unit, onDelete: (name: String) -&gt; Unit, onVerwaltungAnfordern: () -&gt; Unit, onBack: () -&gt; Unit, sicherungAnbieten: Boolean = false, sicherungMeldung: BackupMessage? = null, onSicherungEinspielen: () -&gt; Unit = {}, showFirstProfileHint: Boolean = false, onDismissFirstProfileHint: () -&gt; Unit = {}, )</ID>
+    <ID>LongParameterList:ProfileScreen.kt$( title: String, initialName: String, initialAvatarId: String, confirmLabel: String, confirmTestTag: String, forbiddenNames: List&lt;String&gt;, showAvatarPicker: Boolean = true, onConfirm: (name: String, avatarId: String) -&gt; Unit, onDismiss: () -&gt; Unit, )</ID>
+    <ID>LongParameterList:RechnenMenuScreen.kt$( freigabe: Freigabe, onOpenGrundrechenarten: () -&gt; Unit, onOpenVerdoppeln: () -&gt; Unit, onOpenZahlenmauer: () -&gt; Unit, begruessungFaellig: () -&gt; Boolean, onBack: () -&gt; Unit = {}, )</ID>
+    <ID>LongParameterList:RechnenMenuScreen.kt$( title: String, @DrawableRes image: Int, testTag: String, iconSize: Dp, tileWidth: Dp, titleFontSize: TextUnit, onClick: () -&gt; Unit, modifier: Modifier = Modifier, )</ID>
+    <ID>LongParameterList:StatsScreen.kt$( correct: Int, total: Int, unlockedBadges: List&lt;UnlockedBadge&gt; = emptyList(), onOpenBadges: () -&gt; Unit = {}, onPlayAgain: () -&gt; Unit, onBackToSelection: () -&gt; Unit )</ID>
+    <ID>LongParameterList:ZahlenmauerScreen.kt$( cell: ZahlenmauerCell, entry: ZahlenmauerEntryState?, selected: Boolean, checked: Boolean, size: Dp = 52.dp, onClick: () -&gt; Unit, )</ID>
+    <ID>LongParameterList:ZahlenmauerScreen.kt$( state: CellVisualState, cell: ZahlenmauerCell, entry: ZahlenmauerEntryState?, selected: Boolean, checked: Boolean, errorColor: Color, woodColor: Color, )</ID>
+    <ID>LongParameterList:ZahlenspieleMenuScreen.kt$( freigabe: Freigabe, onOpenVerliebte: () -&gt; Unit, onOpenVergleichen: () -&gt; Unit, onOpenNachbarzahlen: () -&gt; Unit, begruessungFaellig: () -&gt; Boolean, onBack: () -&gt; Unit = {}, )</ID>
+    <ID>LongParameterList:ZahlenspieleMenuScreen.kt$( title: String, @DrawableRes image: Int, testTag: String, iconSize: Dp, tileWidth: Dp, titleFontSize: TextUnit, onClick: () -&gt; Unit, modifier: Modifier = Modifier, )</ID>
+    <ID>MagicNumber:AdultGate.kt$10</ID>
+    <ID>MagicNumber:AdultGate.kt$6</ID>
+    <ID>MagicNumber:BadgeVisuals.kt$0xFFBDBDBD</ID>
+    <ID>MagicNumber:Badges.kt$10</ID>
+    <ID>MagicNumber:Badges.kt$100</ID>
+    <ID>MagicNumber:Badges.kt$20</ID>
+    <ID>MagicNumber:Badges.kt$3</ID>
+    <ID>MagicNumber:Badges.kt$50</ID>
+    <ID>MagicNumber:Badges.kt$BadgeTier.BRONZE$20</ID>
+    <ID>MagicNumber:Badges.kt$BadgeTier.DIAMANT$200</ID>
+    <ID>MagicNumber:Badges.kt$BadgeTier.GOLD$100</ID>
+    <ID>MagicNumber:Badges.kt$BadgeTier.PLATIN$500</ID>
+    <ID>MagicNumber:Badges.kt$BadgeTier.SAPHIR$150</ID>
+    <ID>MagicNumber:Badges.kt$BadgeTier.SILBER$50</ID>
+    <ID>MagicNumber:Color.kt$0xFF0077B6</ID>
+    <ID>MagicNumber:Color.kt$0xFF2A6FDB</ID>
+    <ID>MagicNumber:Color.kt$0xFF3E2712</ID>
+    <ID>MagicNumber:Color.kt$0xFF3F7D34</ID>
+    <ID>MagicNumber:Color.kt$0xFF4FC3E8</ID>
+    <ID>MagicNumber:Color.kt$0xFF625b71</ID>
+    <ID>MagicNumber:Color.kt$0xFF6650a4</ID>
+    <ID>MagicNumber:Color.kt$0xFF7A4E2B</ID>
+    <ID>MagicNumber:Color.kt$0xFF7D5260</ID>
+    <ID>MagicNumber:Color.kt$0xFF8E9AAF</ID>
+    <ID>MagicNumber:Color.kt$0xFF8ECAE6</ID>
+    <ID>MagicNumber:Color.kt$0xFF9E3B2E</ID>
+    <ID>MagicNumber:Color.kt$0xFFB0B0B0</ID>
+    <ID>MagicNumber:Color.kt$0xFFB3261E</ID>
+    <ID>MagicNumber:Color.kt$0xFFCCC2DC</ID>
+    <ID>MagicNumber:Color.kt$0xFFCD7F32</ID>
+    <ID>MagicNumber:Color.kt$0xFFD0BCFF</ID>
+    <ID>MagicNumber:Color.kt$0xFFE0CBA0</ID>
+    <ID>MagicNumber:Color.kt$0xFFEFB8C8</ID>
+    <ID>MagicNumber:Color.kt$0xFFF3E3C3</ID>
+    <ID>MagicNumber:Color.kt$0xFFFB8500</ID>
+    <ID>MagicNumber:Color.kt$0xFFFFB703</ID>
+    <ID>MagicNumber:FeatherEdges.kt$0.72f</ID>
+    <ID>MagicNumber:FreigabeViewModel.kt$FreigabeViewModel$5_000</ID>
+    <ID>MagicNumber:GameLogic.kt$0.5f</ID>
+    <ID>MagicNumber:GameLogic.kt$0.70</ID>
+    <ID>MagicNumber:GameLogic.kt$0.75f</ID>
+    <ID>MagicNumber:GameLogic.kt$0.8f</ID>
+    <ID>MagicNumber:GameLogic.kt$0.90</ID>
+    <ID>MagicNumber:GameLogic.kt$10</ID>
+    <ID>MagicNumber:GameLogic.kt$3</ID>
+    <ID>MagicNumber:GameScreen.kt$0.35f</ID>
+    <ID>MagicNumber:GameScreen.kt$0.85f</ID>
+    <ID>MagicNumber:GameScreen.kt$5</ID>
+    <ID>MagicNumber:GameViewModel.kt$GameViewModel$3</ID>
+    <ID>MagicNumber:HomeScreen.kt$0.45f</ID>
+    <ID>MagicNumber:HomeScreen.kt$0.50f</ID>
+    <ID>MagicNumber:HomeScreen.kt$0.90f</ID>
+    <ID>MagicNumber:HomeScreen.kt$14f</ID>
+    <ID>MagicNumber:HomeScreen.kt$16f</ID>
+    <ID>MagicNumber:ProfileScreen.kt$4</ID>
+    <ID>MagicNumber:SelectionScreen.kt$10f</ID>
+    <ID>MagicNumber:StatsScreen.kt$0.8f</ID>
+    <ID>MagicNumber:StatsScreen.kt$250</ID>
+    <ID>MagicNumber:StatsScreen.kt$3</ID>
+    <ID>MagicNumber:VergleichenSelectionScreen.kt$10f</ID>
+    <ID>MagicNumber:ZahlenmauerLogic.kt$0.70</ID>
+    <ID>MagicNumber:ZahlenmauerLogic.kt$0.90</ID>
+    <ID>MagicNumber:ZahlenmauerLogic.kt$4</ID>
+    <ID>MagicNumber:ZahlenmauerSelectionScreen.kt$0.8f</ID>
+    <ID>MagicNumber:ZahlenmauerViewModel.kt$ZahlenmauerViewModel$3</ID>
+    <ID>MagicNumber:ZahlenspieleSelectionScreen.kt$10f</ID>
+    <ID>MatchingDeclarationName:AdultGate.kt$AdultChallenge</ID>
+    <ID>MaxLineLength:GameScreen.kt$text = if (feedback.isCorrect) "Super! Richtig! 🎉" else "Leider falsch. Richtig ist: ${feedback.correctAnswer}"</ID>
+    <ID>MaxLineLength:SelectionScreen.kt$containerColor = if (isSelected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.secondaryContainer</ID>
+    <ID>MaxLineLength:SelectionScreen.kt$contentColor = if (isSelected) MaterialTheme.colorScheme.onPrimary else MaterialTheme.colorScheme.onSecondaryContainer</ID>
+    <ID>MaxLineLength:ZahlenspieleMenuScreen.kt$ZahlenspielId.VERGLEICHEN to GameVisual(R.drawable.game_vergleich, x = 0.60f, y = 0.64f, testTag = "game_vergleich")</ID>
+    <ID>MaximumLineLength:GameScreen.kt$ </ID>
+    <ID>MaximumLineLength:SelectionScreen.kt$ </ID>
+    <ID>MaximumLineLength:ZahlenspieleMenuScreen.kt$ </ID>
+    <ID>NoWildcardImports:ExampleUnitTest.kt$import org.junit.Assert.*</ID>
+    <ID>NoWildcardImports:SelectionScreen.kt$import androidx.compose.foundation.layout.*</ID>
+    <ID>NoWildcardImports:SelectionScreen.kt$import androidx.compose.material3.*</ID>
+    <ID>NoWildcardImports:SelectionScreen.kt$import androidx.compose.runtime.*</ID>
+    <ID>NoWildcardImports:VergleichenSelectionScreen.kt$import androidx.compose.foundation.layout.*</ID>
+    <ID>NoWildcardImports:VergleichenSelectionScreen.kt$import androidx.compose.material3.*</ID>
+    <ID>NoWildcardImports:VergleichenSelectionScreen.kt$import androidx.compose.runtime.*</ID>
+    <ID>NoWildcardImports:ZahlenspieleSelectionScreen.kt$import androidx.compose.foundation.layout.*</ID>
+    <ID>NoWildcardImports:ZahlenspieleSelectionScreen.kt$import androidx.compose.material3.*</ID>
+    <ID>NoWildcardImports:ZahlenspieleSelectionScreen.kt$import androidx.compose.runtime.*</ID>
+    <ID>ReturnCount:GameViewModel.kt$GameViewModel$fun onCheck()</ID>
+    <ID>TooManyFunctions:GameViewModel.kt$GameViewModel : ViewModel</ID>
+    <ID>TooManyFunctions:NachbarzahlenViewModel.kt$NachbarzahlenViewModel : ViewModel</ID>
+    <ID>TooManyFunctions:UserProfileDao.kt$UserProfileDao</ID>
+    <ID>TooManyFunctions:ZahlenmauerViewModel.kt$ZahlenmauerViewModel : ViewModel</ID>
+    <ID>WildcardImport:ExampleUnitTest.kt$import org.junit.Assert.*</ID>
+    <ID>WildcardImport:SelectionScreen.kt$import androidx.compose.foundation.layout.*</ID>
+    <ID>WildcardImport:SelectionScreen.kt$import androidx.compose.material3.*</ID>
+    <ID>WildcardImport:SelectionScreen.kt$import androidx.compose.runtime.*</ID>
+    <ID>WildcardImport:VergleichenSelectionScreen.kt$import androidx.compose.foundation.layout.*</ID>
+    <ID>WildcardImport:VergleichenSelectionScreen.kt$import androidx.compose.material3.*</ID>
+    <ID>WildcardImport:VergleichenSelectionScreen.kt$import androidx.compose.runtime.*</ID>
+    <ID>WildcardImport:ZahlenspieleSelectionScreen.kt$import androidx.compose.foundation.layout.*</ID>
+    <ID>WildcardImport:ZahlenspieleSelectionScreen.kt$import androidx.compose.material3.*</ID>
+    <ID>WildcardImport:ZahlenspieleSelectionScreen.kt$import androidx.compose.runtime.*</ID>
+  </CurrentIssues>
+</SmellBaseline>

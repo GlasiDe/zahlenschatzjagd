@@ -1,0 +1,29 @@
+# Unit-Tests und statische Analyse bei jedem Push und Pull Request.
+# `connectedAndroidTest` läuft hier bewusst nicht: Es braucht einen Emulator und bleibt
+# Punkt 3 der Test-Pflicht in CLAUDE.md. Signiert wird nie in der CI (docs/agents/release.md).
+name: Tests
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # Startet nur den Gradle-Client. Den Daemon (JetBrains JDK 21) lädt Gradle selbst,
+      # siehe gradle/gradle-daemon-jvm.properties.
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+
+      - uses: gradle/actions/setup-gradle@v4
+
+      - name: gradlew test detekt
+        run: ./gradlew test detekt --continue

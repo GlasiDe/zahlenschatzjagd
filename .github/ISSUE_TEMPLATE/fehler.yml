@@ -1,0 +1,43 @@
+name: Fehler melden
+description: Etwas in der App funktioniert nicht wie erwartet, oder sie zeigt einen Schutzhalt.
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        **Bitte keine Sicherungsdatei anhängen und keine Namen von Kindern nennen.**
+        Dieses Issue ist öffentlich. Eine Sicherungsdatei enthält die Profile mit Namen und den
+        gesamten Übungsverlauf. Für einen Schutzhalt genügen die Zahlen auf dem Bildschirm, am
+        einfachsten als Bildschirmfoto.
+  - type: input
+    id: version
+    attributes:
+      label: App-Version
+      description: In den Android-Einstellungen unter Apps → Zahlenschatzjagd, beim Schutzhalt auch in der Meldung.
+      placeholder: "2.0"
+    validations:
+      required: true
+  - type: input
+    id: geraet
+    attributes:
+      label: Gerät
+      description: Hersteller, Modell und Android-Version.
+      placeholder: "z. B. Samsung Galaxy Tab A8, Android 14"
+    validations:
+      required: true
+  - type: textarea
+    id: was
+    attributes:
+      label: Was ist passiert?
+      description: Was hast du getan, was hast du erwartet, und was ist stattdessen passiert?
+    validations:
+      required: true
+  - type: textarea
+    id: schutzhalt
+    attributes:
+      label: Text des Schutzhalts
+      description: |
+        Nur, wenn die App statt der Schatzkarte eine Meldung für Erwachsene zeigt: den Text oder ein
+        Bildschirmfoto davon. Darin stehen die Zahlen, mit denen sich der Fall nachbauen lässt.
+    validations:
+      required: false

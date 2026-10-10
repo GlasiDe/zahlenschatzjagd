@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <!--
+        allowBackup="false": Androids Auto-Backup ist abgeschaltet. Mit der Voreinstellung
+        „true" und ohne Regeln wanderte die gesamte Datenbank samt der Namen der Kinder
+        ungefragt zu Google – in einer App, die sonst keine einzige Berechtigung verlangt.
+        Der Fortschritt verlässt das Gerät nur noch über die **Sicherung** im Elternbereich,
+        die ein Erwachsener selbst anlegt. Siehe `docs/adr/0022-kein-android-auto-backup.md`.
+
+        Die Angaben `dataExtractionRules` und `fullBackupContent` wären damit wirkungslos und
+        fehlen deshalb.
+    -->
+    <application
+        android:name=".ZahlenschatzjagdApp"
+        android:allowBackup="false"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.Zahlenschatzjagd">
+        <!--
+            adjustResize: Ohne diese Angabe meldet Android vor Version 11 die Größe der
+            eingeblendeten Tastatur gar nicht erst, und `Modifier.imePadding()` im NavHost
+            hätte dort nichts, womit es rechnen könnte. Ab Version 11 kommt die Angabe zwar
+            ohne Wirkung aufs Fenster (die App zeichnet randlos, siehe `enableEdgeToEdge` in
+            MainActivity), die Insets liefert das System aber ohnehin.
+        -->
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.Zahlenschatzjagd"
+            android:windowSoftInputMode="adjustResize">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>
