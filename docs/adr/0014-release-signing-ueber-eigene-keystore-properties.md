@@ -8,9 +8,10 @@ bewusst **nicht** in `local.properties`, die laut eigenem Kopfkommentar von Andr
 
 ## Consequences
 
-- Fehlen beide Dateien (etwa auf einem anderen Rechner), bleiben die Signing-Angaben leer:
-  `assembleDebug` funktioniert weiter, `assembleRelease` erzeugt dann aber keine
-  installierbare APK.
+- Fehlen beide Dateien (etwa auf einem anderen Rechner), bleibt der Release-Build ohne
+  Signatur: `assembleDebug` funktioniert weiter, `assembleRelease` erzeugt eine unsignierte
+  und damit nicht installierbare APK, bricht aber nicht ab. Genau diese APK bauen die
+  GitHub-Action und F-Droid, um sie mit der signierten auf Bitgleichheit zu vergleichen.
 - `gradlew assembleRelease` liefert **eine** vollständige Datei unter
   `app/build/outputs/apk/release/`. Das ist der Unterschied zum Weiterreichen einer aus
   Android Studio deployten App: Die besteht aus Split-APKs und ist so nicht installierbar.

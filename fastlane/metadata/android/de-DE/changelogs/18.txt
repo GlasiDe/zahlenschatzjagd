@@ -1,0 +1,1 @@
+Für Kinder und Eltern ändert sich nichts. Diese Fassung wird so gebaut, dass jeder Build desselben Stands bitgleich ausfällt. Damit kann F-Droid die App selbst nachbauen und trotzdem dieselbe Signatur wie auf GitHub ausliefern: Wer die App von GitHub hat, kann künftig über F-Droid aktualisieren und umgekehrt – der Fortschritt bleibt erhalten.

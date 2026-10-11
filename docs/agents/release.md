@@ -1,14 +1,19 @@
 # Release
 
-Verteilt wird die App als signierte APK über die GitHub-Releases dieses Repos. Jedes Release
-trägt einen Git-Tag, damit sich zu jeder APK genau der Quelltext finden lässt, aus dem sie
-gebaut ist.
+Verteilt wird die App als signierte APK über die GitHub-Releases dieses Repos und über F-Droid.
+Jedes Release trägt einen Git-Tag, damit sich zu jeder APK genau der Quelltext finden lässt, aus
+dem sie gebaut ist. F-Droid baut aus diesem Tag nach und liefert unsere signierte APK nur aus,
+wenn sein Build bis auf die Signatur bitgleich ist
+(`docs/adr/0033-f-droid-mit-signatur-des-entwicklers.md`).
 
 ## Ablauf
 
 1. **Version erhöhen:** `versionCode` und `versionName` in `app/build.gradle.kts`. Der
    Versionsname steht über `BuildConfig.VERSION_NAME` in jeder Sicherungsdatei, eine verteilte
-   Fassung muss also unterscheidbar bleiben.
+   Fassung muss also unterscheidbar bleiben. Dazu der **Änderungshinweis**
+   `fastlane/metadata/android/de-DE/changelogs/<versionCode>.txt`: höchstens 500 Zeichen (Grenze
+   von F-Droid), in wenigen Sätzen, was sich für Kinder und Eltern ändert. Er ist zugleich die
+   Grundlage der Notizen im GitHub-Release.
 2. **Committen.** Gebaut wird immer aus einem Commit, nie aus einem Arbeitsstand.
 3. **Lokal signiert bauen:** `gradlew assembleRelease`. Die Signatur kommt aus der nicht
    versionierten `keystore.properties`
@@ -26,15 +31,31 @@ gebaut ist.
    der Lauf für genau diesen Commit grün ist. Bei Rot wird nicht getaggt: erst die Ursache
    klären. Liegt sie im App-Code, ist das ein neuer Stand derselben Nummer – neu committen,
    bauen und prüfen.
-7. **Taggen:** `git tag -a v<versionName> -m "<versionName> (vc <versionCode>)"`, dann
+7. **Auf Bitgleichheit prüfen:** Die Action legt eine unsignierte Release-APK aus einem
+   Linux-Build ab (7 Tage aufbewahrt). Herunterladen und mit der eigenen vergleichen:
+
+   ```
+   gh run download <id> -n app-release-unsigned -D build/abgleich
+   docker run --rm -v "${PWD}:/r" debian:trixie-slim sh -c "apt-get update -qq && apt-get install -y -qq --no-install-recommends apksigcopier apksigner > /dev/null 2>&1 && apksigcopier compare /r/releases/<apk> --unsigned /r/build/abgleich/app-release-unsigned.apk && echo BITGLEICH"
+   ```
+
+   Ohne `BITGLEICH` wird nicht getaggt: F-Droid würde diese Fassung nicht bauen. Die Ursache
+   findet `diffoscope` (Debian-Paket `diffoscope-minimal`) zwischen beiden APKs. Wer an der
+   Ursache dreht, hält sich an ADR-0033.
+8. **Taggen:** `git tag -a v<versionName> -m "<versionName> (vc <versionCode>)"`, dann
    `git push origin v<versionName>`.
-8. **Veröffentlichen:** `gh release create v<versionName> <apk> --title "<versionName>"
-   --notes-file <notizen.md>`. Die Notizen sagen in wenigen Sätzen, was sich für Kinder und
-   Eltern ändert, und nennen die SHA-256-Prüfsumme der APK.
+9. **Veröffentlichen:** die APK aus Schritt 4 als `Zahlenschatzjagd-<versionName>.apk`
+   kopieren – **ohne Datum**, denn F-Droid sucht sie über das Muster
+   `Zahlenschatzjagd-%v.apk` – und
+   `gh release create v<versionName> <apk> --title "<versionName>" --notes-file <notizen.md>`.
+   Die Notizen sind der Änderungshinweis aus Schritt 1 plus die SHA-256-Prüfsumme der APK.
+
+F-Droid bemerkt den neuen Tag von selbst und baut nach. Bis die Fassung dort erscheint, vergehen
+erfahrungsgemäß einige Tage.
 
 Tag und Release schreiben eine Fassung öffentlich fest, deshalb kommen sie zuletzt: erst wenn
-Gerät **und** Action zugestimmt haben. Wann gebaut wird, ist dagegen gleich – die APK hängt am
-Commit, nicht am Push. Ein Commit auf `main` ohne Tag ist noch kein Release.
+Gerät, Action **und** Bitgleichheit zugestimmt haben. Wann gebaut wird, ist dagegen gleich – die
+APK hängt am Commit, nicht am Push. Ein Commit auf `main` ohne Tag ist noch kein Release.
 
 ## Eine Nummer darf neu gebaut werden, solange sie nicht veröffentlicht ist
 

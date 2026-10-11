@@ -9,13 +9,14 @@ plugins {
 }
 
 // Release-Signing: Zugangsdaten liegen in der nicht versionierten keystore.properties
-// (siehe .gitignore). Fehlt die Datei (z. B. auf einem anderen Rechner), bleiben die
-// Werte leer, damit z. B. assembleDebug trotzdem funktioniert.
+// (siehe .gitignore). Fehlt die Datei (z. B. auf einem anderen Rechner, in der CI oder bei
+// F-Droid), wird der Release-Build unsigniert gebaut statt abzubrechen.
 val keystoreProperties = Properties()
 val keystorePropertiesFile = rootProject.file("keystore.properties")
 if (keystorePropertiesFile.exists()) {
     keystoreProperties.load(keystorePropertiesFile.inputStream())
 }
+val storeFilePath = keystoreProperties.getProperty("storeFile", "")
 
 android {
     namespace = "io.github.glaside.zahlenschatzjagd"
@@ -32,15 +33,14 @@ android {
         targetSdk = 36
         // Bei jedem verteilten Release beide erhöhen und einen Git-Tag setzen,
         // sonst ist später nicht feststellbar, was in einer APK steckt (siehe docs/agents/release.md).
-        versionCode = 17
-        versionName = "2.0.1"
+        versionCode = 18
+        versionName = "2.0.2"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
     signingConfigs {
         create("release") {
-            val storeFilePath = keystoreProperties.getProperty("storeFile", "")
             if (storeFilePath.isNotEmpty()) {
                 storeFile = rootProject.file(storeFilePath)
                 storePassword = keystoreProperties.getProperty("storePassword", "")
@@ -57,12 +57,20 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro",
             )
-            signingConfig = signingConfigs.getByName("release")
+            if (storeFilePath.isNotEmpty()) {
+                signingConfig = signingConfigs.getByName("release")
+            }
         }
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
+    }
+    // Ohne diesen Schalter legt AGP eine verschlüsselte Abhängigkeitsliste in den Signaturblock,
+    // die nur Google lesen kann. F-Droid beanstandet sie (#3).
+    dependenciesInfo {
+        includeInApk = false
+        includeInBundle = false
     }
     buildFeatures {
         compose = true
