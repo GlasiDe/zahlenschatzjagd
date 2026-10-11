@@ -25,8 +25,10 @@ den Fortschritt.
   als Rückfall nicht vorgesehen: Lieber F-Droid mit eigener Signatur.
 - **F-Droid mit der Signatur des Entwicklers** (gewählt). Nachgewiesen am 11.10.2026: Ein Build
   unter Windows und einer unter Linux (Docker, anderer Pfad) waren bis auf die Signatur
-  bitgleich (`apksigcopier compare`). Der Gradle-Daemon lief beide Male auf JetBrains JDK 21,
-  jeweils in der Fassung für die eigene Plattform.
+  bitgleich (`apksigcopier compare`). Ebenso ein Probelauf von `fdroid build` im Image
+  `fdroidserver:buildserver-trixie`, Schritt für Schritt wie in der CI von `fdroiddata`. Dort
+  löscht F-Droid `gradle-daemon-jvm.properties`, der Daemon läuft also auf Debians OpenJDK 21
+  statt auf JetBrains JDK 21 – am Ergebnis ändert das nichts.
 
 ## Consequences
 
@@ -39,6 +41,8 @@ den Fortschritt.
   Release-Build, der ohne Schlüssel unsigniert durchläuft
   ([0014](./0014-release-signing-ueber-eigene-keystore-properties.md)). Baseline-Profil und die
   Versionskontroll-Angaben in der APK stören nicht, solange aus einem Commit gebaut wird.
+- **Keine Gradle-Plugins, die fertige Binärdateien laden.** F-Droids Scanner bricht sonst ab;
+  das ungenutzte Toolchain-Plugin `foojay-resolver` ist deshalb entfernt.
 - **Nichts in den Build, was nicht aus dem Commit folgt:** keine Bauzeit, keine Pfade, kein
   „dirty"-Kennzeichen. Das betrifft etwa den geplanten Git-Stand in App und Sicherung (#2).
 - **Die Release-Datei heißt `Zahlenschatzjagd-<versionName>.apk`**, ohne Datum. F-Droid findet
