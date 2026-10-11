@@ -32,8 +32,8 @@ android {
         targetSdk = 36
         // Bei jedem verteilten Release beide erhöhen und einen Git-Tag setzen,
         // sonst ist später nicht feststellbar, was in einer APK steckt (siehe docs/agents/release.md).
-        versionCode = 16
-        versionName = "2.0"
+        versionCode = 17
+        versionName = "2.0.1"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
