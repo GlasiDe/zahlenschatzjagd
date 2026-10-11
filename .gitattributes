@@ -1,0 +1,15 @@
+# Überall LF, auch in Windows-Arbeitskopien mit core.autocrlf=true. Textdateien wie
+# assets/OFL.txt und mehrzeilige Strings im Kotlin-Code landen unverändert in der APK;
+# mit CRLF wäre ein lokaler Build nicht bitgleich mit dem Linux-Build von F-Droid (#3).
+* text=auto eol=lf
+
+# cmd.exe verlangt CRLF, sonst springen Sprungmarken ins Leere.
+*.bat text eol=crlf
+
+*.jar binary
+*.jks binary
+*.jpg binary
+*.mp3 binary
+*.png binary
+*.ttf binary
+*.webp binary
