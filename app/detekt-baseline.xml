@@ -100,7 +100,7 @@
     <ID>FunctionNaming:VergleichenSelectionScreen.kt$@Composable fun VergleichenSelectionScreen( freigabe: Freigabe, onStartGame: (GameSettings) -&gt; Unit, onBack: () -&gt; Unit = {}, )</ID>
     <ID>FunctionNaming:ZahlenmauerScreen.kt$@Composable fun ZahlenmauerScreen( viewModel: ZahlenmauerViewModel, onFinish: (Int, Int, List&lt;UnlockedBadge&gt;) -&gt; Unit, onCancel: () -&gt; Unit, )</ID>
     <ID>FunctionNaming:ZahlenmauerScreen.kt$@Composable private fun ZahlenmauerCellView( cell: ZahlenmauerCell, entry: ZahlenmauerEntryState?, selected: Boolean, checked: Boolean, size: Dp = 52.dp, onClick: () -&gt; Unit, )</ID>
-    <ID>FunctionNaming:ZahlenmauerScreen.kt$@Composable private fun ZahlenmauerPyramid( wall: Zahlenmauer, entries: Map&lt;ZahlenmauerPos, ZahlenmauerEntryState&gt;, selectedPos: ZahlenmauerPos?, checked: Boolean, onSelectCell: (ZahlenmauerPos) -&gt; Unit, )</ID>
+    <ID>FunctionNaming:ZahlenmauerScreen.kt$@Composable internal fun ZahlenmauerPyramid( wall: Zahlenmauer, entries: Map&lt;ZahlenmauerPos, ZahlenmauerEntryState&gt;, selectedPos: ZahlenmauerPos?, checked: Boolean, onSelectCell: (ZahlenmauerPos) -&gt; Unit, )</ID>
     <ID>FunctionNaming:ZahlenmauerScreen.kt$@Composable private fun ZahlenmauerResultSection(state: ZahlenmauerUiState, onNextWall: () -&gt; Unit)</ID>
     <ID>FunctionNaming:ZahlenmauerSelectionScreen.kt$@Composable fun ZahlenmauerSelectionScreen( freigabe: Freigabe, onStartGame: (ZahlenmauerSettings) -&gt; Unit, onBack: () -&gt; Unit = {}, )</ID>
     <ID>FunctionNaming:ZahlenmauerSelectionScreen.kt$@Composable private fun DifficultyButton( difficulty: ZahlenmauerDifficulty, isSelected: Boolean, onSelect: () -&gt; Unit, )</ID>

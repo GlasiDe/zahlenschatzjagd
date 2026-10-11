@@ -5,14 +5,17 @@ import androidx.compose.ui.semantics.getOrNull
 import androidx.compose.ui.test.SemanticsMatcher
 import androidx.compose.ui.test.assertCountEquals
 import androidx.compose.ui.test.assertIsDisplayed
+import androidx.compose.ui.test.getBoundsInRoot
 import androidx.compose.ui.test.hasClickAction
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.compose.ui.test.onAllNodesWithTag
 import androidx.compose.ui.test.onAllNodesWithText
 import androidx.compose.ui.test.onNodeWithTag
+import androidx.compose.ui.test.onRoot
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performScrollTo
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Rule
@@ -64,6 +67,23 @@ class ZahlenmauerFlowInstrumentedTest {
         spieleRundeDurch()
 
         composeTestRule.onNodeWithTag("back_to_selection_button").assertIsDisplayed()
+    }
+
+    /** Lage in schmalen Rahmen und mit Scroll-Rückfall prüft `ZahlenmauerLageTest`. */
+    @Test
+    fun mauerStehtMittigAufDemBildschirm() {
+        starteZahlenmauer("LEICHT")
+
+        val bildschirm = composeTestRule.onRoot().getBoundsInRoot()
+        val spitze = composeTestRule
+            .onNodeWithTag("zahlenmauer_cell_${ZahlenmauerDifficulty.LEICHT.floors - 1}_0")
+            .getBoundsInRoot()
+        assertEquals(
+            "Mitte der Spitze (dp)",
+            (bildschirm.left + bildschirm.right).value / 2,
+            (spitze.left + spitze.right).value / 2,
+            1f,
+        )
     }
 
     /** Der ✓ ist nie gesperrt, wertet aber erst, wenn jede Lücke gefüllt ist. */

@@ -152,9 +152,12 @@ private fun ZahlenmauerResultSection(state: ZahlenmauerUiState, onNextWall: () -
     }
 }
 
-/** Die Pyramide, Spitze oben (höchste Etage zuerst) bis Basis unten - natürliche Leserichtung. */
+/**
+ * Die Pyramide, Spitze oben (höchste Etage zuerst) bis Basis unten - natürliche Leserichtung.
+ * `internal` nur für `ZahlenmauerLageTest`, der sie in einen Rahmen fester Breite setzt.
+ */
 @Composable
-private fun ZahlenmauerPyramid(
+internal fun ZahlenmauerPyramid(
     wall: Zahlenmauer,
     entries: Map<ZahlenmauerPos, ZahlenmauerEntryState>,
     selectedPos: ZahlenmauerPos?,
@@ -166,7 +169,9 @@ private fun ZahlenmauerPyramid(
     val widestRow = wall.difficulty.floors
     val cellSpacing = 6.dp // 3.dp Padding auf jeder Seite der Zelle, siehe ZahlenmauerCellView.
 
-    BoxWithConstraints(modifier = Modifier.fillMaxWidth()) {
+    // Die Box ist bildschirmbreit, die Column nur so breit wie die Mauer: ohne die Ausrichtung
+    // säße die Mauer oben links.
+    BoxWithConstraints(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.TopCenter) {
         val cellSize = adaptiveElementSize(
             available = maxWidth,
             count = widestRow,
