@@ -33,8 +33,8 @@ android {
         targetSdk = 36
         // Bei jedem verteilten Release beide erhöhen und einen Git-Tag setzen,
         // sonst ist später nicht feststellbar, was in einer APK steckt (siehe docs/agents/release.md).
-        versionCode = 18
-        versionName = "2.0.2"
+        versionCode = 19
+        versionName = "2.0.3"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -52,7 +52,9 @@ android {
 
     buildTypes {
         release {
-            isMinifyEnabled = false
+            // R8 kürzt den Code. Der Build muss dabei bitgleich nachbaubar bleiben, sonst baut
+            // F-Droid die Fassung nicht (#6, ADR-0033).
+            isMinifyEnabled = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro",

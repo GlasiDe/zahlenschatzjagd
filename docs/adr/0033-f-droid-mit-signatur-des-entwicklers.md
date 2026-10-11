@@ -40,7 +40,9 @@ den Fortschritt.
   (`.gitattributes`), kein Abhängigkeits-Blob im Signaturblock (`dependenciesInfo`), ein
   Release-Build, der ohne Schlüssel unsigniert durchläuft
   ([0014](./0014-release-signing-ueber-eigene-keystore-properties.md)). Baseline-Profil und die
-  Versionskontroll-Angaben in der APK stören nicht, solange aus einem Commit gebaut wird.
+  Versionskontroll-Angaben in der APK stören nicht, solange aus einem Commit gebaut wird. Auch R8
+  nicht: Seit 2.0.3 ist es eingeschaltet. Ein Probestand damit ergab am 11.10.2026 unter Windows,
+  unter Linux und mit `fdroid build` dieselbe APK (#6).
 - **Keine Gradle-Plugins, die fertige Binärdateien laden.** F-Droids Scanner bricht sonst ab;
   das ungenutzte Toolchain-Plugin `foojay-resolver` ist deshalb entfernt.
 - **Nichts in den Build, was nicht aus dem Commit folgt:** keine Bauzeit, keine Pfade, kein
@@ -50,4 +52,6 @@ den Fortschritt.
 - **Der Rückweg ist teuer.** Wechselt F-Droid später auf die eigene Signatur, sind alle
   F-Droid-Installationen von den GitHub-Installationen getrennt und müssen über die Sicherung
   umziehen. Der Schlüssel ab 2.0 bleibt damit für beide Bezugsquellen unersetzlich.
-- **Erste Fassung auf F-Droid ist 2.0.2.** 2.0 und 2.0.1 tragen noch den Abhängigkeits-Blob.
+- **Erste Fassung auf F-Droid ist 2.0.3.** 2.0 und 2.0.1 tragen noch den Abhängigkeits-Blob. 2.0.2
+  wäre nachbaubar, ihr Tag enthält aber noch keine englischen Store-Texte, und deren Fehlen meldet
+  F-Droids Prüfung als kritisch.
