@@ -13,7 +13,10 @@ wenn sein Build bis auf die Signatur bitgleich ist
    Fassung muss also unterscheidbar bleiben. Dazu der **Änderungshinweis**
    `fastlane/metadata/android/de-DE/changelogs/<versionCode>.txt`: höchstens 500 Zeichen (Grenze
    von F-Droid), in wenigen Sätzen, was sich für Kinder und Eltern ändert. Er ist zugleich die
-   Grundlage der Notizen im GitHub-Release.
+   Grundlage der Notizen im GitHub-Release. Geschrieben wird er aus **allen** Issues des
+   Milestones dieser Version, offenen wie geschlossenen:
+   `gh issue list --milestone "<versionName>" --state all` (`docs/agents/issue-tracker.md`). Ein
+   Text, der schon mit einem Feature angelegt wurde, wird dabei um die übrigen Issues ergänzt.
 
    **Zeigt die App ihn auch?** Wer seine Version in `aenderungshinweiseInDerApp` (oben in
    `app/build.gradle.kts`, `versionCode to versionName`) einträgt, bekommt den Hinweis nach dem
@@ -39,7 +42,8 @@ wenn sein Build bis auf die Signatur bitgleich ist
 5. **Auf einem Gerät prüfen:** `adb -s <gerät> install -r <apk>`. Das ersetzt, ohne zu löschen,
    solange die Signatur dieselbe ist. **Nie deinstallieren** und kein `connectedAndroidTest`
    gegen ein Gerät mit Release-Build (`docs/agents/testing.md`): Mit der App geht die
-   Datenbank.
+   Datenbank. Findet die Prüfung einen Fehler, wird er ein neues `bug`-Issue im Milestone dieser
+   Version; erledigte Issues bleiben geschlossen (`docs/agents/issue-tracker.md`).
 6. **Pushen und auf die Action warten:** `git push origin main` (nach Rückfrage, siehe
    `CLAUDE.md`), dann `gh run list --commit <sha>` bzw. `gh run watch <id> --exit-status`, bis
    der Lauf für genau diesen Commit grün ist. Bei Rot wird nicht getaggt: erst die Ursache
@@ -65,6 +69,9 @@ wenn sein Build bis auf die Signatur bitgleich ist
    `Zahlenschatzjagd-%v.apk` – und
    `gh release create v<versionName> <apk> --title "<versionName>" --notes-file <notizen.md>`.
    Die Notizen sind der Änderungshinweis aus Schritt 1 plus die SHA-256-Prüfsumme der APK.
+10. **Milestone schließen:** Ist darin noch ein Issue offen, gehört es entweder vorher erledigt
+    oder in den Milestone der nächsten Version verschoben – geschlossen wird nur ein Milestone,
+    dessen Issues alle geschlossen sind.
 
 F-Droid bemerkt den neuen Tag von selbst und baut nach. Bis die Fassung dort erscheint, vergehen
 erfahrungsgemäß einige Tage. Was F-Droid dabei liest, steht in der Metadatei

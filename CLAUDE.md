@@ -45,9 +45,11 @@ Single-Context: `CONTEXT.md` und `docs/adr/` im Repo-Root. Siehe `docs/agents/do
 
 - Es gibt einen Branch: `main`. Releases tragen einen Tag (`docs/agents/release.md`).
 - **Keine Pull Requests für eigene Arbeit.** Eigene Arbeit geht direkt als Commit auf `main`.
-  Issues tragen dabei nur ihre Kategorie (`bug`/`enhancement`) und bleiben offen, bis die
-  geänderte App **auf einem Gerät** geprüft ist. Ein Pull Request von außen trägt
-  `ready-for-human` im üblichen Sinn: fertig gebaut, wartet auf Prüfung und Merge.
+  Issues tragen dabei nur ihre Kategorie (`bug`/`enhancement`) und den **Milestone** des
+  nächsten Releases. Geschlossen werden sie, sobald die geänderte App **auf einem Gerät**
+  geprüft ist – nicht erst beim Release (`docs/agents/issue-tracker.md`, „Milestones“). Ein
+  Pull Request von außen trägt `ready-for-human` im üblichen Sinn: fertig gebaut, wartet auf
+  Prüfung und Merge.
 - Frag vor **jedem** `git push` beim Nutzer nach und warte seine Bestätigung ab, auch wenn für
   andere Aktionen Freigaben erteilt wurden.
 - Gib bei `git push` immer Remote und Branch an: `git push origin main`. **Niemals ein bloßes

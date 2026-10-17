@@ -26,8 +26,27 @@ Umgekehrt gehört nichts in die Roadmap, was bereits ein offenes Issue hat.
 - **Kommentieren**: `gh issue comment <nummer> --body "..."`
 - **Labels**: `gh issue edit <nummer> --add-label "..."` / `--remove-label "..."`
 - **Schließen**: `gh issue close <nummer> --comment "..."`
+- **Milestone**: `gh issue edit <nummer> --milestone "2.1.0"`; anlegen per
+  `gh api repos/GlasiDe/zahlenschatzjagd/milestones -f title="2.1.0"`
 
 Issue-Titel verwenden die Begriffe aus `CONTEXT.md` — „Übungsform", nicht „Spiel".
+
+## Milestones: was in ein Release gehört
+
+Jedes Issue, das auf `main` landet, bekommt den Milestone des nächsten Releases, benannt nach
+dessen `versionName` („2.1.0“). Der Milestone hält zusammen, was ein Release enthält; die
+Release-Sitzung liest ihn mit `gh issue list --milestone "2.1.0" --state all` und schreibt daraus
+den Änderungshinweis (`docs/agents/release.md`).
+
+**Geschlossen heißt erledigt, nicht veröffentlicht.** Ein Issue wird geschlossen, sobald sein
+Code auf `main` liegt, die Code-Prüfung durch ist und die App auf einem Gerät geprüft wurde. Der
+Grund sind die Skills: `to-tickets` arbeitet die Frontier ab („any ticket whose blockers are all
+done“), `wayfinder` und GitHubs eigene Blockierung werten ein Ticket erst als frei, wenn seine
+Blocker **geschlossen** sind. Bis zum Release offene, fertige Issues hielten dort alles dahinter
+fest. Weil ein Milestone auch geschlossene Issues listet, geht dabei nichts verloren.
+
+Findet die Geräteprüfung des Releases einen Fehler, wird er ein neues `bug`-Issue im selben
+Milestone; das erledigte Issue bleibt geschlossen.
 
 ## PRs als Anfrage-Oberfläche: nein
 
