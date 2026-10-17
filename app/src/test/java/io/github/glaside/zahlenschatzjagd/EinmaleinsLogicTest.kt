@@ -46,6 +46,13 @@ class EinmaleinsLogicTest {
         assertEquals(EINMALEINS_ZAHLENRAUM, groesste)
     }
 
+    /** Wortlaut abgenommen (#9). */
+    @Test
+    fun dieAnsageNenntDieReihe() {
+        assertEquals("Jetzt die 7er-Reihe!", reihenAnsage(7))
+        assertEquals("Jetzt die 10er-Reihe!", reihenAnsage(10))
+    }
+
     @Test
     fun aufsagen_nimmtJedeReiheEinmal_aufsteigend() {
         assertEquals(listOf(3, 7, 9), aufsageReihenfolge(listOf(9, 3, 7, 3)))

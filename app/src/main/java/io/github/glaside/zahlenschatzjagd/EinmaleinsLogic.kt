@@ -41,6 +41,12 @@ fun einmaleinsKennung(reihe: Int, stufe: EinmaleinsSchwierigkeitsstufe): String 
 fun reihenName(reihe: Int): String = "${reihe}er-Reihe"
 
 /**
+ * Was Ella beim Aufsagen zu Beginn einer Reihe sagt, wenn mehrere gewählt sind (Wortlaut
+ * abgenommen, #9). „Jetzt" markiert den Wechsel, kurz genug, dass es beim Weitertippen nicht stört.
+ */
+fun reihenAnsage(reihe: Int): String = "Jetzt die ${reihenName(reihe)}!"
+
+/**
  * Eine Malaufgabe des Einmaleins: [faktor] mal [reihe]. Die Reihe steht immer **hinten**
  * (`8 · 7`, nie `7 · 8`) – so lesen sich die zehn Aufgaben einer Reihe als eine Folge.
  */

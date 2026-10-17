@@ -157,6 +157,29 @@ class AufsagenViewModelTest {
         assertEquals(20, vm.uiState.value.gepruefte)
     }
 
+    /** Mit mehreren Reihen sagt Ella zu Beginn jeder Reihe an, welche dran ist – auch der ersten. */
+    @Test
+    fun mehrereReihen_jedeReiheWirdZuBeginnAngesagt() {
+        val vm = viewModel(reihen = listOf(9, 3))
+
+        assertEquals(3, vm.uiState.value.ausstehendeAnsage)
+        vm.ansageVorgelesen()
+        assertNull(vm.uiState.value.ausstehendeAnsage)
+
+        vm.sageAuf()
+        assertNull("Während der Reihe kommt nichts nach", vm.uiState.value.ausstehendeAnsage)
+        vm.onWeiter()
+
+        assertEquals(9, vm.uiState.value.ausstehendeAnsage)
+    }
+
+    @Test
+    fun eineEinzigeReihe_wirdNichtAngesagt() {
+        val vm = viewModel(reihen = listOf(7))
+
+        assertNull(vm.uiState.value.ausstehendeAnsage)
+    }
+
     /** Jedes Kästchen ist eine Zeile der Historie – unter der Kennung seiner Reihe, im Zahlenraum 100. */
     @Test
     fun jedesKaestchenWirdAlsAufgabeSeinerReiheFestgehalten() = runTest {

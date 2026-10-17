@@ -278,7 +278,9 @@ Aufgaben bleiben im Zahlenraum bis 100.
 rückwärts, in Schritten, beliebige Startzahl)", und unter Schnelles Kopfrechnen genauso: „zählen
 vorwärts und rückwärts in Schritten". Ein falsches Kästchen wird sofort markiert und mit der
 richtigen Zahl gefüllt, damit der Rest der Reihe darauf aufbauen kann. Eine Runde nimmt jede
-gewählte Reihe einmal, aufsteigend.
+gewählte Reihe einmal, aufsteigend. Sind mehrere gewählt, sagt Ella zu Beginn jeder Reihe an,
+welche dran ist („Jetzt die 7er-Reihe!") – ein Kind, das noch nicht sicher liest, merkte den
+Wechsel sonst nur an der Überschrift. Bei einer einzigen Reihe bleibt sie still.
 
 **Durcheinander** (schwerer): einzelne Aufgaben `8 · 7 = _` aus allen gewählten Reihen, **ohne
 Zurücklegen** gezogen. Erst wenn alle Aufgaben der gewählten Reihen einmal dran waren, wird neu

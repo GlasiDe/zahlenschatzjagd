@@ -36,7 +36,9 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import io.github.glaside.zahlenschatzjagd.AUFGABEN_JE_REIHE
 import io.github.glaside.zahlenschatzjagd.UnlockedBadge
+import io.github.glaside.zahlenschatzjagd.reihenAnsage
 import io.github.glaside.zahlenschatzjagd.reihenName
+import io.github.glaside.zahlenschatzjagd.ui.AusstehendeAnsage
 import io.github.glaside.zahlenschatzjagd.ui.AusstehenderTon
 import io.github.glaside.zahlenschatzjagd.ui.game.Ziffernblock
 import io.github.glaside.zahlenschatzjagd.ui.theme.MapCorrect
@@ -67,6 +69,9 @@ fun AufsagenScreen(
     val state by viewModel.uiState.collectAsStateWithLifecycle()
 
     BildschirmWachHalten()
+    // Beides einmal – nach dem Drehen steht nichts mehr aus
+    // (`docs/adr/0030-einmalige-ausgaben-ueberstehen-das-drehen.md`).
+    AusstehendeAnsage(state.ausstehendeAnsage?.let(::reihenAnsage), viewModel::ansageVorgelesen)
     AusstehenderTon(state.ausstehenderTon, viewModel::tonGespielt)
 
     LaunchedEffect(state.fertig) {

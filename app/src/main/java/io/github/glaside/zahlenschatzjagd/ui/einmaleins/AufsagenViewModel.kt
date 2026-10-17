@@ -46,6 +46,13 @@ data class AufsagenUiState(
      * (`docs/adr/0030-einmalige-ausgaben-ueberstehen-das-drehen.md`).
      */
     val ausstehenderTon: GameSound? = null,
+    /**
+     * Die Reihe, die Ella ansagt („Jetzt die 7er-Reihe!"), bis die Oberfläche mit
+     * [AufsagenViewModel.ansageVorgelesen] quittiert hat. Gesetzt zu Beginn **jeder** Reihe, auch
+     * der ersten – aber nur, wenn mehrere gewählt sind: Bei einer einzigen steht ohnehin fest,
+     * welche dran ist. Quittiert wird, damit sie nach dem Drehen nicht noch einmal kommt.
+     */
+    val ausstehendeAnsage: Int? = null,
 ) {
     /** Alle zehn Kästchen der Reihe sind geprüft – jetzt geht es mit „Weiter" zur nächsten. */
     val reiheFertig: Boolean get() = kaestchen.size == AUFGABEN_JE_REIHE
@@ -76,7 +83,13 @@ class AufsagenViewModel(
         scope = viewModelScope,
     )
 
-    private val _uiState = MutableStateFlow(AufsagenUiState(reihe = reihen.first(), reihenGesamt = reihen.size))
+    private val _uiState = MutableStateFlow(
+        AufsagenUiState(
+            reihe = reihen.first(),
+            reihenGesamt = reihen.size,
+            ausstehendeAnsage = ansageNurBeiMehrerenReihen(reihen.first()),
+        )
+    )
     val uiState: StateFlow<AufsagenUiState> = _uiState.asStateFlow()
 
     private var rundeBeendet = false
@@ -128,6 +141,7 @@ class AufsagenViewModel(
                     reiheNummer = it.reiheNummer + 1,
                     kaestchen = emptyList(),
                     ausstehenderTon = null,
+                    ausstehendeAnsage = ansageNurBeiMehrerenReihen(reihen[it.reiheNummer]),
                 )
             }
         } else {
@@ -137,6 +151,14 @@ class AufsagenViewModel(
             }
         }
     }
+
+    /** Die Oberfläche hat die [AufsagenUiState.ausstehendeAnsage] vorgelesen. */
+    fun ansageVorgelesen() {
+        _uiState.update { it.copy(ausstehendeAnsage = null) }
+    }
+
+    /** Angesagt wird nur, wenn mehrere Reihen gewählt sind – siehe [AufsagenUiState.ausstehendeAnsage]. */
+    private fun ansageNurBeiMehrerenReihen(reihe: Int): Int? = reihe.takeIf { reihen.size > 1 }
 
     /** Die Oberfläche hat den [AufsagenUiState.ausstehenderTon] gespielt. */
     fun tonGespielt() {

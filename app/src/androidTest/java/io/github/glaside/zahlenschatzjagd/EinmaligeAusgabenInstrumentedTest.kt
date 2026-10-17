@@ -131,6 +131,31 @@ class EinmaligeAusgabenInstrumentedTest {
     }
 
     /**
+     * Beim Aufsagen mit mehreren Reihen sagt Ella jede Reihe einmal an – nach dem Drehen nicht noch
+     * einmal, bei der nächsten Reihe wieder.
+     */
+    @Test
+    fun aufsagen_jedeReiheEinmalAngesagt_nichtNachDemDrehen() {
+        tippe("island_rechnen")
+        tippe("game_einmaleins")
+        scrolleUndTippe("einmaleins_reihe_2")
+        scrolleUndTippe("einmaleins_reihe_3")
+        zaehler.leeren()
+        scrolleUndTippe("start_button")
+        assertEquals(listOf("Jetzt die 2er-Reihe!"), zaehler.saetze)
+
+        drehe()
+        assertEquals(listOf("Jetzt die 2er-Reihe!"), zaehler.saetze)
+
+        (1..10).forEach { faktor ->
+            (faktor * 2).toString().forEach { scrolleUndTippe("digit_$it") }
+            scrolleUndTippe("digit_check")
+        }
+        scrolleUndTippe("einmaleins_next_button")
+        assertEquals(listOf("Jetzt die 2er-Reihe!", "Jetzt die 3er-Reihe!"), zaehler.saetze)
+    }
+
+    /**
      * Startkarte und Menüs begrüßen bei **jedem Besuch** – nach dem Drehen aber nicht noch einmal.
      * Ein Besuch ist es, wenn zuvor ein anderer Bildschirm sichtbar war.
      */
