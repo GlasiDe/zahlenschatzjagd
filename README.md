@@ -4,7 +4,9 @@
 first two school years practise maths on their own – offline, without ads and without a single
 permission. It is made for children who cannot read yet: pictures and a voice that reads
 everything aloud show the way. Everything here is in German because the app follows the
-curriculum of North Rhine-Westphalia and speaks to German-speaking children and parents.*
+curriculum of North Rhine-Westphalia and speaks to German-speaking children and parents. Get it
+on [F-Droid](https://f-droid.org/packages/io.github.glaside.zahlenschatzjagd/) or from the
+[releases](https://github.com/GlasiDe/zahlenschatzjagd/releases/latest).*
 
 ## Was die App ist
 
@@ -51,8 +53,24 @@ Piraten-Avatar und eigenem Fortschritt.
 
 ## Installation
 
+Die App läuft ab Android 8.0 und kommt auf zwei Wegen aufs Gerät. Beide liefern **dieselbe,
+vom Entwickler signierte APK**: Man kann jederzeit von einem Weg zum anderen wechseln, der
+Fortschritt bleibt erhalten ([ADR-0033](docs/adr/0033-f-droid-mit-signatur-des-entwicklers.md)).
+
+**Über F-Droid** (empfohlen, mit automatischen Updates):
+
+<a href="https://f-droid.org/packages/io.github.glaside.zahlenschatzjagd/"><img src="https://f-droid.org/badge/get-it-on-de.png" alt="Jetzt bei F-Droid" height="80"></a>
+
+1. Die App [F-Droid](https://f-droid.org/) installieren, falls sie noch nicht auf dem Gerät ist.
+2. Darin nach **Zahlenschatzjagd** suchen und installieren. Updates bietet F-Droid von selbst an.
+
+Neue Fassungen erscheinen dort einige Tage nach dem Release auf GitHub, weil F-Droid jede Fassung
+erst selbst nachbaut und prüft.
+
+**Direkt von GitHub:**
+
 1. Unter [Releases](https://github.com/GlasiDe/zahlenschatzjagd/releases/latest) die Datei
-   `Zahlenschatzjagd-….apk` auf das Android-Gerät laden (Android 8.0 oder neuer).
+   `Zahlenschatzjagd-….apk` auf das Android-Gerät laden.
 2. Die Datei antippen. Android fragt einmalig, ob der Browser oder Dateimanager **Apps aus
    unbekannten Quellen** installieren darf – das erlauben.
 3. Updates werden genauso installiert, über die vorhandene App. Der Fortschritt bleibt erhalten.
