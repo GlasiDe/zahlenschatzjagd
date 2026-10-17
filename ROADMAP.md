@@ -65,8 +65,6 @@ wenig.
 - **Geld rechnen**: Mit Münzen/Scheinen rechnen (zusammenzählen, Wechselgeld).
   Bleibt trotz der Leitlinie stehen: Anlässe im Alltag gibt es zu wenige, und mit dem
   schwindenden Bargeld fehlt Kindern zunehmend die Anschauung.
-- **Einmaleins-Trainer**: Eigener Modus, um gezielt einzelne Einmaleins-Reihen
-  (z. B. nur die 7er-Reihe) zu üben statt gemischter Multiplikationsaufgaben.
 - **Maßeinheiten umrechnen**: cm/m, g/kg, ml/l – eher für 3./4. Klasse.
 - **Runden und Schätzen**: Zahlen auf Zehner/Hunderter runden, Ergebnisse schätzen.
 

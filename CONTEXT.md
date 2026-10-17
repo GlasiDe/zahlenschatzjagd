@@ -22,9 +22,37 @@ _Avoid_: Frage, Rechnung, Item
 
 **Übungsform**:
 Eine Art zu üben — Grundrechenarten, Verdoppeln, Zahlenmauer, Verliebte Zahlen, Zahlen
-vergleichen, Nachbarzahlen. Jede Übungsform hat eigene Aufgaben, eine eigene Darstellung und
-eigene Abzeichen.
+vergleichen, Nachbarzahlen, Einmaleins. Jede Übungsform hat eigene Aufgaben, eine eigene
+Darstellung und eigene Abzeichen.
 _Avoid_: Spiel, Modus, Rechenspiel, Zahlenspiel, Aufgabentyp
+
+**Einmaleins**:
+Die Übungsform, in der ein Kind gezielt einzelne Reihen des kleinen Einmaleins übt statt
+gemischter Malaufgaben. Sie hat zwei Schwierigkeitsstufen: **Aufsagen** und **Durcheinander**.
+Das gemischte Einmaleins bleibt Sache der Rechenart Mal in den Grundrechenarten, Geteilt
+ebenso — Umkehraufgaben gehören nicht zum Einmaleins.
+_Avoid_: Einmaleins-Trainer, Mal-Modus, Malreihen-Spiel
+
+**Reihe**:
+Die zehn Malaufgaben zu einem Faktor, etwa die 7er-Reihe `1 · 7` bis `10 · 7`. Die Reihe steht
+immer hinten. Wählbar sind die 2er- bis 10er-Reihe; die 1er-Reihe nicht, denn sie ist
+Zählen, nicht Einmaleins. Nicht zu verwechseln mit einer Zahlenfolge aus **Zahlenreihen
+fortsetzen**: Die Reihe ist vorgegeben und wird auswendig gekonnt, beginnt immer beim Faktor
+selbst und hört bei seinem Zehnfachen auf. Beim Fortsetzen muss das Kind die Schrittweite erst
+erkennen, und die Folge beginnt irgendwo.
+_Avoid_: Einmaleins-Reihe, Malreihe, Tabelle, Zahlenreihe
+
+**Aufsagen**:
+Die leichtere Schwierigkeitsstufe des Einmaleins: Die Reihe der Reihe nach, zehn leere
+Kästchen ohne Aufgabe davor, in die nacheinander `7, 14, 21 …` kommen — so, wie Kinder sie in
+der Schule aufsagen. Ein falsches Kästchen wird sofort markiert und mit der richtigen Zahl
+gefüllt, damit der Rest der Reihe darauf aufbauen kann.
+_Avoid_: Reihe der Reihe nach, Vorwärts, Zählen
+
+**Durcheinander**:
+Die schwerere Schwierigkeitsstufe des Einmaleins: einzelne Malaufgaben der gewählten Reihen
+in gemischter Reihenfolge, geschrieben als `8 · 7 = _`.
+_Avoid_: Gemischt, Zufällig, Abfragen
 
 **Nachbarzahlen**:
 Die Übungsform, in der drei aufeinanderfolgende Zahlen nebeneinander stehen: eine ist
