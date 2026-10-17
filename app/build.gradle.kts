@@ -18,6 +18,14 @@ if (keystorePropertiesFile.exists()) {
 }
 val storeFilePath = keystoreProperties.getProperty("storeFile", "")
 
+// Versionen, deren Änderungshinweis die App nach dem Update einmal beim Start zeigt (#8), als
+// versionCode to versionName. Der Text steht allein in
+// fastlane/metadata/android/de-DE/changelogs/<versionCode>.txt – derselbe, den F-Droid zeigt.
+// Einträge bleiben stehen, auch wenn längst neuere Versionen da sind: Wer eine Version
+// überspringt, bekommt ihren Hinweis trotzdem. Wann eine Version hierher gehört, steht in
+// docs/agents/release.md.
+val aenderungshinweiseInDerApp: Map<Int, String> = mapOf()
+
 android {
     namespace = "io.github.glaside.zahlenschatzjagd"
     compileSdk {
@@ -33,6 +41,7 @@ android {
         targetSdk = 36
         // Bei jedem verteilten Release beide erhöhen und einen Git-Tag setzen,
         // sonst ist später nicht feststellbar, was in einer APK steckt (siehe docs/agents/release.md).
+        // Dazu entscheiden, ob die neue Version in aenderungshinweiseInDerApp (oben) gehört.
         versionCode = 19
         versionName = "2.0.3"
 
@@ -119,4 +128,73 @@ dependencies {
 detekt {
     buildUponDefaultConfig = true
     baseline = file("detekt-baseline.xml")
+}
+
+/**
+ * Schreibt die markierten Änderungshinweise als `AENDERUNGSHINWEISE` in eine Kotlin-Datei (#8).
+ *
+ * F-Droid baut aus dem Tag nach und liefert nur aus, wenn das Ergebnis bitgleich zu unserer APK
+ * ist (ADR-0033). Die Ausgabe darf deshalb nur vom Inhalt abhängen: feste Reihenfolge, kein
+ * Zeitstempel, und Zeilenenden, die nicht davon abhängen, ob Git unter Windows `\r\n` ausgecheckt
+ * hat.
+ */
+abstract class AenderungshinweiseErzeugen : DefaultTask() {
+    @get:Input
+    abstract val versionen: MapProperty<Int, String>
+
+    @get:InputDirectory
+    @get:PathSensitive(PathSensitivity.RELATIVE)
+    abstract val changelogs: DirectoryProperty
+
+    @get:OutputDirectory
+    abstract val ausgabe: DirectoryProperty
+
+    @TaskAction
+    fun erzeuge() {
+        val eintraege = versionen.get().toSortedMap().map { (code, name) ->
+            val datei = changelogs.file("$code.txt").get().asFile
+            if (!datei.isFile) {
+                throw GradleException(
+                    "Version $code ist in aenderungshinweiseInDerApp markiert, aber " +
+                        "${datei.path} fehlt.",
+                )
+            }
+            val text = datei.readText(Charsets.UTF_8).replace("\r", "").trim()
+            "    Aenderungshinweis(versionCode = $code, versionName = ${literal(name)}, " +
+                "text = ${literal(text)}),"
+        }
+        val ziel = ausgabe.get().asFile
+        ziel.deleteRecursively()
+        val datei = File(ziel, "io/github/glaside/zahlenschatzjagd/data/Aenderungshinweise.kt")
+        datei.parentFile.mkdirs()
+        datei.writeText(
+            buildString {
+                append("// Erzeugt von app/build.gradle.kts aus fastlane/metadata/android/")
+                append("de-DE/changelogs – nicht von Hand ändern.\n")
+                append("package io.github.glaside.zahlenschatzjagd.data\n\n")
+                append("internal val AENDERUNGSHINWEISE: List<Aenderungshinweis> = listOf(\n")
+                eintraege.forEach { append(it).append('\n') }
+                append(")\n")
+            },
+            Charsets.UTF_8,
+        )
+    }
+
+    private fun literal(wert: String): String =
+        "\"" + wert.replace("\\", "\\\\").replace("\"", "\\\"").replace("$", "\\$")
+            .replace("\n", "\\n") + "\""
+}
+
+androidComponents {
+    onVariants { variant ->
+        val erzeuge = tasks.register<AenderungshinweiseErzeugen>(
+            "erzeugeAenderungshinweise" + variant.name.replaceFirstChar { it.uppercaseChar() },
+        ) {
+            versionen.set(aenderungshinweiseInDerApp)
+            changelogs.set(
+                rootProject.layout.projectDirectory.dir("fastlane/metadata/android/de-DE/changelogs"),
+            )
+        }
+        variant.sources.kotlin?.addGeneratedSourceDirectory(erzeuge, AenderungshinweiseErzeugen::ausgabe)
+    }
 }

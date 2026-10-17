@@ -25,6 +25,12 @@ fun ComposeTestRule.ensureActiveProfileExists(name: String = "Testpirat") {
         onAllNodesWithTag("profile_add_button").fetchSemanticsNodes().isNotEmpty() ||
             onAllNodesWithTag("home_profile_badge").fetchSemanticsNodes().isNotEmpty()
     }
+    // Trägt die App eine markierte Version, die auf dem Testgerät noch nicht gezeigt war, liegt
+    // der Änderungshinweis über allem. Einmal weggetippt, ist er für alle folgenden Tests erledigt.
+    waitForIdle()
+    if (onAllNodesWithTag("aenderungshinweis_verstanden").fetchSemanticsNodes().isNotEmpty()) {
+        onNodeWithTag("aenderungshinweis_verstanden").performClick()
+    }
     if (onAllNodesWithTag("profile_add_button").fetchSemanticsNodes().isNotEmpty()) {
         onNodeWithTag("profile_add_button").performClick()
         onNodeWithTag("profile_name_input").performTextInput(name)

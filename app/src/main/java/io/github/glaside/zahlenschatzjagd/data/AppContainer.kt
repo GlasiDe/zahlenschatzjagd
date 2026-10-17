@@ -23,6 +23,7 @@ interface AppContainer {
     val bildschirmzeitRepository: BildschirmzeitRepository
     val rundenRepository: RundenRepository
     val tonUndVorlesenRepository: TonUndVorlesenRepository
+    val aenderungshinweisRepository: AenderungshinweisRepository
 }
 
 class AppDataContainer(private val context: Context) : AppContainer {
@@ -56,5 +57,9 @@ class AppDataContainer(private val context: Context) : AppContainer {
 
     override val tonUndVorlesenRepository: TonUndVorlesenRepository by lazy {
         TonUndVorlesenRepository(context.userPreferencesDataStore)
+    }
+
+    override val aenderungshinweisRepository: AenderungshinweisRepository by lazy {
+        AenderungshinweisRepository(context.userPreferencesDataStore)
     }
 }

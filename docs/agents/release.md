@@ -14,6 +14,20 @@ wenn sein Build bis auf die Signatur bitgleich ist
    `fastlane/metadata/android/de-DE/changelogs/<versionCode>.txt`: höchstens 500 Zeichen (Grenze
    von F-Droid), in wenigen Sätzen, was sich für Kinder und Eltern ändert. Er ist zugleich die
    Grundlage der Notizen im GitHub-Release.
+
+   **Zeigt die App ihn auch?** Wer seine Version in `aenderungshinweiseInDerApp` (oben in
+   `app/build.gradle.kts`, `versionCode to versionName`) einträgt, bekommt den Hinweis nach dem
+   Update einmal beim Start eingeblendet – F-Droid aktualisiert automatisch, die Eltern sähen ihn
+   sonst nie (#8). Einträge bleiben stehen; wer Versionen überspringt, bekommt alle dazwischen.
+   - **Pflicht**, sobald eine Version eine neue Übungsform oder einen neuen Zahlenraum bringt:
+     Neues ist für bestehende Profile sofort freigegeben
+     (`docs/adr/0018-freigabe-als-sperre-gespeichert.md`). Der Hinweis nennt die Neuerung dann
+     beim Namen. Wo sie sich abwählen lässt, schreibt der Dialog selbst darunter – das gehört
+     nicht in den Text.
+   - **Nicht** bei reinen Wartungsversionen („Für Kinder und Eltern ändert sich nichts"): Die
+     stören beim Start nur.
+
+   Ist eine Version markiert, ohne dass es ihren Text gibt, bricht der Build ab.
 2. **Committen.** Gebaut wird immer aus einem Commit, nie aus einem Arbeitsstand.
 3. **Lokal signiert bauen:** `gradlew assembleRelease`. Die Signatur kommt aus der nicht
    versionierten `keystore.properties`

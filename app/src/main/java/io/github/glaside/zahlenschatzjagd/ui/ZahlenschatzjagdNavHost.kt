@@ -9,6 +9,7 @@ import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
@@ -31,11 +32,16 @@ import io.github.glaside.zahlenschatzjagd.UnlockedBadge
 import io.github.glaside.zahlenschatzjagd.ZahlenmauerDifficulty
 import io.github.glaside.zahlenschatzjagd.ZahlenmauerSettings
 import io.github.glaside.zahlenschatzjagd.ZahlenschatzjagdApp
+import io.github.glaside.zahlenschatzjagd.data.AENDERUNGSHINWEISE
+import io.github.glaside.zahlenschatzjagd.data.Aenderungshinweis
 import io.github.glaside.zahlenschatzjagd.data.AppContainer
 import io.github.glaside.zahlenschatzjagd.data.Freigabe
 import io.github.glaside.zahlenschatzjagd.data.freigabeVon
 import io.github.glaside.zahlenschatzjagd.decodeUnlockedBadges
 import io.github.glaside.zahlenschatzjagd.encode
+import io.github.glaside.zahlenschatzjagd.ui.aenderungshinweis.AENDERUNGSHINWEIS_GESPROCHEN
+import io.github.glaside.zahlenschatzjagd.ui.aenderungshinweis.AenderungshinweisDialog
+import io.github.glaside.zahlenschatzjagd.ui.aenderungshinweis.faelligeHinweiseFlow
 import io.github.glaside.zahlenschatzjagd.ui.badges.BadgeScreen
 import io.github.glaside.zahlenschatzjagd.ui.badges.BadgeViewModel
 import io.github.glaside.zahlenschatzjagd.ui.game.GameScreen
@@ -80,17 +86,37 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.launch
 
 /**
  * Zentrale Navigation der App.
  * Einstellungen und Ergebnis werden als Navigations-Argumente übergeben, sodass kein
  * hochgezogener remember-Zustand mehr nötig ist. Das [GameViewModel] wird pro
  * Game-Ziel (NavBackStackEntry) erzeugt, also automatisch pro Runde frisch.
+ *
+ * [aenderungshinweise] und [aktuelleVersion] kommen nur herein, damit ein Test einen Hinweis
+ * zeigen kann, ohne eine Version zu markieren; die App nimmt immer die Vorgaben.
  */
 @Composable
-fun ZahlenschatzjagdNavHost() {
+fun ZahlenschatzjagdNavHost(
+    aenderungshinweise: List<Aenderungshinweis> = AENDERUNGSHINWEISE,
+    aktuelleVersion: Int = BuildConfig.VERSION_CODE,
+) {
     val navController = rememberNavController()
     val appContainer = (LocalContext.current.applicationContext as ZahlenschatzjagdApp).container
+    val scope = rememberCoroutineScope()
+
+    // Änderungshinweise nach einem Update, einmal je Gerät (#8). Auf dem Weg hierher ist der
+    // Schutzhalt schon ausgeschlossen: Dort gibt es diesen Bildschirm gar nicht, und der Stand
+    // bleibt ungemerkt, bis eine Version wieder normal startet.
+    val faelligeHinweise =
+        faelligeHinweiseFlow(appContainer, aenderungshinweise, aktuelleVersion).geladen()?.wert
+    // Nichts zu zeigen – Neuinstallation oder unmarkierte Version: still als gesehen merken.
+    LaunchedEffect(faelligeHinweise) {
+        if (faelligeHinweise?.isEmpty() == true) {
+            appContainer.aenderungshinweisRepository.merkeGezeigt(aktuelleVersion)
+        }
+    }
 
     // Wessen Bildschirmzeit gerade zählt – siehe [gemessenesProfil].
     val aktuelleRoute = navController.currentBackStackEntryAsState().value?.destination?.route
@@ -174,9 +200,13 @@ fun ZahlenschatzjagdNavHost() {
                             }
                         }
                     }
+                    // Auch auf die Änderungshinweise warten: Steht einer an, spricht Ella seinen
+                    // Satz statt der Begrüßung. Kämen beide, schnitte der spätere den früheren
+                    // ab, und welcher später kommt, wäre Zufall.
                     if (profile == null || profilwechselOhnePin == null || aktiverName == null) {
                         return@composable
                     }
+                    if (faelligeHinweise == null) return@composable
                     val activeUser = aktiverName.wert
                     val activeProfile = profile.wert.firstOrNull { it.name == activeUser }
                     HomeScreen(
@@ -202,7 +232,12 @@ fun ZahlenschatzjagdNavHost() {
                         onOpenEltern = {
                             navController.navigate(Routes.parentGate(Torziel.ELTERNBEREICH))
                         },
-                        begruessungFaellig = { besuchsgedaechtnis.begruessungFaellig(eintrag.id) },
+                        // Das Besuchsgedächtnis zuerst fragen, damit der Besuch auch dann als
+                        // begrüßt gilt, wenn der Änderungshinweis den Satz übernimmt.
+                        begruessungFaellig = {
+                            besuchsgedaechtnis.begruessungFaellig(eintrag.id) &&
+                                faelligeHinweise.isEmpty()
+                        },
                     )
                 }
 
@@ -775,6 +810,21 @@ fun ZahlenschatzjagdNavHost() {
                     }
                 }
             }
+        }
+
+        // Außerhalb des NavHost, damit er über jedem Ziel liegt – auch über dem
+        // Profilbildschirm, auf den die Startkarte ohne aktives Profil umleitet. So kommt erst
+        // der Hinweis und dann die Profilfrage.
+        if (!faelligeHinweise.isNullOrEmpty()) {
+            VorlesenBeimErstenErscheinen(AENDERUNGSHINWEIS_GESPROCHEN)
+            AenderungshinweisDialog(
+                hinweise = faelligeHinweise,
+                onVerstanden = {
+                    scope.launch {
+                        appContainer.aenderungshinweisRepository.merkeGezeigt(aktuelleVersion)
+                    }
+                },
+            )
         }
     }
 }

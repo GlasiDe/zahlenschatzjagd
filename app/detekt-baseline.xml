@@ -4,9 +4,10 @@
   <CurrentIssues>
     <ID>CyclomaticComplexMethod:GameLogic.kt$fun createTask( types: List&lt;String&gt;, range: Int, random: Random = Random.Default, multipleChoice: Boolean = false, showCoins: Boolean = false, ): Task</ID>
     <ID>CyclomaticComplexMethod:GameScreen.kt$@Composable fun GameScreen( viewModel: GameViewModel, onFinish: (Int, List&lt;UnlockedBadge&gt;) -&gt; Unit, onCancel: () -&gt; Unit, // Parameter für den Abbrechen-Button )</ID>
-    <ID>CyclomaticComplexMethod:ZahlenschatzjagdNavHost.kt$@Composable fun ZahlenschatzjagdNavHost()</ID>
+    <ID>CyclomaticComplexMethod:ZahlenschatzjagdNavHost.kt$@Composable fun ZahlenschatzjagdNavHost( aenderungshinweise: List&lt;Aenderungshinweis&gt; = AENDERUNGSHINWEISE, aktuelleVersion: Int = BuildConfig.VERSION_CODE, )</ID>
     <ID>ForEachOnRange:GameScreen.kt$0 until target step 5</ID>
     <ID>FunctionNaming:AdultGate.kt$@Composable fun AdultGate( onPass: () -&gt; Unit, onCancel: () -&gt; Unit, )</ID>
+    <ID>FunctionNaming:AenderungshinweisBeimStart.kt$@Composable fun AenderungshinweisDialog(hinweise: List&lt;Aenderungshinweis&gt;, onVerstanden: () -&gt; Unit)</ID>
     <ID>FunctionNaming:Avatars.kt$@Composable fun AvatarImage( avatarId: String, size: Dp, modifier: Modifier = Modifier, )</ID>
     <ID>FunctionNaming:BackupScreen.kt$@Composable fun BackupScreen(viewModel: BackupViewModel, onBack: () -&gt; Unit)</ID>
     <ID>FunctionNaming:BackupScreen.kt$@Composable private fun BackupSection(busy: Boolean, onExport: () -&gt; Unit, onImport: () -&gt; Unit)</ID>
@@ -37,7 +38,7 @@
     <ID>FunctionNaming:HomeScreen.kt$@Composable private fun IslandTile( island: Island, @DrawableRes image: Int, islandSize: Dp, tileWidth: Dp, titleFontSize: TextUnit, onClick: () -&gt; Unit, modifier: Modifier = Modifier, )</ID>
     <ID>FunctionNaming:HomeScreen.kt$@Composable private fun MapTitle()</ID>
     <ID>FunctionNaming:HomeScreen.kt$@Composable private fun TreasureMap( inseln: List&lt;Island&gt;, onOpenIsland: (Island) -&gt; Unit, modifier: Modifier = Modifier, )</ID>
-    <ID>FunctionNaming:ZahlenschatzjagdNavHost.kt$@Composable fun ZahlenschatzjagdNavHost()</ID>
+    <ID>FunctionNaming:ZahlenschatzjagdNavHost.kt$@Composable fun ZahlenschatzjagdNavHost( aenderungshinweise: List&lt;Aenderungshinweis&gt; = AENDERUNGSHINWEISE, aktuelleVersion: Int = BuildConfig.VERSION_CODE, )</ID>
     <ID>FunctionNaming:NachbarzahlenFeld.kt$@Composable internal fun Feld( position: Nachbarposition, aufgabe: Nachbarzahlenaufgabe, state: NachbarzahlenUiState, groesse: Dp, onClick: () -&gt; Unit, )</ID>
     <ID>FunctionNaming:NachbarzahlenScreen.kt$@Composable fun NachbarzahlenScreen( viewModel: NachbarzahlenViewModel, onFinish: (Int, Int, List&lt;UnlockedBadge&gt;) -&gt; Unit, onCancel: () -&gt; Unit, )</ID>
     <ID>FunctionNaming:NachbarzahlenScreen.kt$@Composable private fun BildschirmWachHalten()</ID>
@@ -117,7 +118,7 @@
     <ID>LongMethod:AdultGate.kt$@Composable fun AdultGate( onPass: () -&gt; Unit, onCancel: () -&gt; Unit, )</ID>
     <ID>LongMethod:GameLogic.kt$fun createTask( types: List&lt;String&gt;, range: Int, random: Random = Random.Default, multipleChoice: Boolean = false, showCoins: Boolean = false, ): Task</ID>
     <ID>LongMethod:GameScreen.kt$@Composable fun GameScreen( viewModel: GameViewModel, onFinish: (Int, List&lt;UnlockedBadge&gt;) -&gt; Unit, onCancel: () -&gt; Unit, // Parameter für den Abbrechen-Button )</ID>
-    <ID>LongMethod:ZahlenschatzjagdNavHost.kt$@Composable fun ZahlenschatzjagdNavHost()</ID>
+    <ID>LongMethod:ZahlenschatzjagdNavHost.kt$@Composable fun ZahlenschatzjagdNavHost( aenderungshinweise: List&lt;Aenderungshinweis&gt; = AENDERUNGSHINWEISE, aktuelleVersion: Int = BuildConfig.VERSION_CODE, )</ID>
     <ID>LongMethod:NachbarzahlenSelectionScreen.kt$@Composable fun NachbarzahlenSelectionScreen( freigabe: Freigabe, onStartGame: (NachbarzahlenSettings) -&gt; Unit, onBack: () -&gt; Unit = {}, )</ID>
     <ID>LongMethod:ProfileScreen.kt$@Composable fun ProfileScreen( profiles: List&lt;UserProfile&gt;, activeUser: String, verwaltungErlaubt: Boolean, onSwitch: (String) -&gt; Unit, onCreate: (name: String, avatarId: String) -&gt; Unit, onRename: (oldName: String, newName: String) -&gt; Unit, onChangeAvatar: (name: String, avatarId: String) -&gt; Unit, onDelete: (name: String) -&gt; Unit, onVerwaltungAnfordern: () -&gt; Unit, onBack: () -&gt; Unit, sicherungAnbieten: Boolean = false, sicherungMeldung: BackupMessage? = null, onSicherungEinspielen: () -&gt; Unit = {}, showFirstProfileHint: Boolean = false, onDismissFirstProfileHint: () -&gt; Unit = {}, )</ID>
     <ID>LongMethod:SelectionScreen.kt$@Composable fun SelectionScreen( freigabe: Freigabe, onStartGame: (GameSettings) -&gt; Unit, onBack: () -&gt; Unit = {}, )</ID>

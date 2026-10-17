@@ -41,6 +41,10 @@ es antippt. Jede Insel führt in einen Bereich:
 Mehrere Geschwister teilen sich ein Gerät: Jedes Kind hat ein **Profil** mit eigenem
 Piraten-Avatar und eigenem Fortschritt.
 
+Bringt ein Update etwas Neues – etwa eine neue Übung, die für alle Kinder sofort offen ist –,
+blendet die App danach einmal einen kurzen **Änderungshinweis** ein, und Ella bittet das Kind,
+ihn den Eltern zu zeigen.
+
 ## Screenshots
 
 <p>

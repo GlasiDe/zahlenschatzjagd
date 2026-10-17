@@ -187,6 +187,13 @@ geschafft. Ein Schalter im Elternbereich schaltet sie ab; er gilt wie der der Vo
 das Gerät und nicht für ein Kind.
 _Avoid_: Sound, Audio, Geräusch, Effekt
 
+**Änderungshinweis**:
+Wenige Sätze dazu, was sich mit einer Version für Kinder und Eltern ändert. Er steht bei F-Droid
+und im GitHub-Release; ausgewählte Hinweise zeigt die App nach dem Update außerdem einmal beim
+Start, damit Eltern auch bei automatischen Updates erfahren, was neu ist — vor allem, wenn eine
+neue Übung sofort freigegeben ist. Es gibt ihn nur in einer Fassung, nicht in kurz und lang.
+_Avoid_: Changelog, Versionshinweis, Neuigkeiten, Release Notes, Patchnotes
+
 **Profilverwaltung**:
 Der Bildschirm hinter dem Profil-Abzeichen der Startkarte, auf dem alle Profile als Karten
 liegen. **Wechseln** ist der Alltagsvorgang und bleibt frei; anlegen, umbenennen, Avatar ändern

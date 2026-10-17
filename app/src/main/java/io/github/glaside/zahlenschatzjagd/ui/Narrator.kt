@@ -51,7 +51,7 @@ object Narrator {
 
     /**
      * Sieht jeden Aufruf von [speak], bevor der Schalter greift – nur für Tests, die zählen, wie
-     * oft vorgelesen werden sollte (`EinmaligeAusgabenInstrumentedTest`).
+     * oft vorgelesen werden sollte (etwa `EinmaligeAusgabenInstrumentedTest`).
      */
     @Volatile
     internal var beobachter: ((String) -> Unit)? = null
