@@ -57,7 +57,9 @@ wenn sein Build bis auf die Signatur bitgleich ist
    findet `diffoscope` (Debian-Paket `diffoscope-minimal`) zwischen beiden APKs. Wer an der
    Ursache dreht, hält sich an ADR-0033.
 8. **Taggen:** `git tag -a v<versionName> -m "<versionName> (vc <versionCode>)"`, dann
-   `git push origin v<versionName>`.
+   `git push origin v<versionName>`. **Schritt 9 unmittelbar danach:** Der Tag allein löst F-Droid
+   aus, und findet dessen Bot die APK unter der `Binaries`-Adresse noch nicht, scheitert der
+   Nachbau.
 9. **Veröffentlichen:** die APK aus Schritt 4 als `Zahlenschatzjagd-<versionName>.apk`
    kopieren – **ohne Datum**, denn F-Droid sucht sie über das Muster
    `Zahlenschatzjagd-%v.apk` – und
@@ -65,7 +67,11 @@ wenn sein Build bis auf die Signatur bitgleich ist
    Die Notizen sind der Änderungshinweis aus Schritt 1 plus die SHA-256-Prüfsumme der APK.
 
 F-Droid bemerkt den neuen Tag von selbst und baut nach. Bis die Fassung dort erscheint, vergehen
-erfahrungsgemäß einige Tage.
+erfahrungsgemäß einige Tage. Was F-Droid dabei liest, steht in der Metadatei
+`metadata/io.github.glaside.zahlenschatzjagd.yml` in `fdroiddata`: Der Bot `checkupdates` sucht
+Tags nach `^v[0-9.]+$` (`UpdateCheckMode`), liest `versionCode` und `versionName` aus dem Stand
+des Tags und trägt den neuen Build selbst ein (`AutoUpdateMode: Version`). Ein Push auf `main`
+ohne Tag löst nichts aus.
 
 Tag und Release schreiben eine Fassung öffentlich fest, deshalb kommen sie zuletzt: erst wenn
 Gerät, Action **und** Bitgleichheit zugestimmt haben. Wann gebaut wird, ist dagegen gleich – die
