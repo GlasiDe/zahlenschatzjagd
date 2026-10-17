@@ -171,6 +171,33 @@ class FreigabeInstrumentedTest {
     }
 
     /**
+     * Beim Einmaleins steht je Reihe und Stufe ein Kästchen im Raster. Eine einzeln abgewählte
+     * Reihe fehlt dem Kind nur in dieser Stufe (`docs/adr/0034-einmaleins-mit-kennungen-je-reihe-und-stufe.md`).
+     */
+    @Test
+    fun eineImRasterAbgewaehlteReiheFehltNurInIhrerStufe() {
+        composeTestRule.oeffneElternbereichUeberDieElternfrage()
+        composeTestRule.onNodeWithTag("parent_entry_freigabe").performScrollTo().performClick()
+        composeTestRule.warteAuf("freigabe_kennung_EINMALEINS_9_AUFSAGEN")
+
+        composeTestRule.onNodeWithTag("freigabe_kennung_EINMALEINS_9_AUFSAGEN").performScrollTo().performClick()
+
+        composeTestRule.onNodeWithTag("freigabe_back_button").performScrollTo().performClick()
+        composeTestRule.warteAuf("parent_back_button")
+        composeTestRule.verlasseDenElternbereich()
+        composeTestRule.warteAuf("island_rechnen")
+
+        composeTestRule.onNodeWithTag("island_rechnen").performClick()
+        composeTestRule.warteAuf("game_einmaleins")
+        composeTestRule.onNodeWithTag("game_einmaleins").performClick()
+        composeTestRule.warteAuf("einmaleins_reihe_8")
+
+        composeTestRule.onAllNodesWithTag("einmaleins_reihe_9").assertCountEquals(0)
+        composeTestRule.onNodeWithText("Durcheinander").performScrollTo().performClick()
+        composeTestRule.onNodeWithTag("einmaleins_reihe_9").performScrollTo().assertIsDisplayed()
+    }
+
+    /**
      * Eltern wählen bei Verliebte Zahlen „Mit Hilfe" ab. Das Kind sieht danach
      * keinen Schalter mehr und übt ohne Münzen
      * (`docs/adr/0028-verliebte-zahlen-mit-und-ohne-hilfe-getrennt.md`).

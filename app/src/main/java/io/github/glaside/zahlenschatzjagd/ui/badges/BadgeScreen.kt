@@ -28,6 +28,11 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import io.github.glaside.zahlenschatzjagd.BADGE_TABS
+import io.github.glaside.zahlenschatzjagd.EINMALEINS_REIHEN
+import io.github.glaside.zahlenschatzjagd.EINMALEINS_TAB
+import io.github.glaside.zahlenschatzjagd.EinmaleinsSchwierigkeitsstufe
+import io.github.glaside.zahlenschatzjagd.einmaleinsKennung
+import io.github.glaside.zahlenschatzjagd.reihenName
 import io.github.glaside.zahlenschatzjagd.truhenBeschriftung
 
 /**
@@ -86,9 +91,68 @@ fun BadgeScreen(
         val selectedTabInfo = BADGE_TABS[selectedTab]
         val cells = state.cells.filter { it.category.key in selectedTabInfo.categoryKeys }
 
+        if (selectedTabInfo.key == EINMALEINS_TAB) {
+            Spacer(Modifier.height(20.dp))
+            EinmaleinsTruhen(cells)
+            return@Column
+        }
         for (cell in cells) {
             Spacer(Modifier.height(20.dp))
             ChestRow(cell)
+        }
+    }
+}
+
+/** So groß ist eine Truhe im Einmaleins-Raster – 18 Truhen in voller Größe wären eine lange Liste. */
+private val RASTER_TRUHE = 72.dp
+
+/**
+ * Die 18 Truhen des Einmaleins als Raster Reihe × Stufe: eine Zeile je Reihe, eine Spalte je Stufe
+ * (`docs/adr/0034-einmaleins-mit-kennungen-je-reihe-und-stufe.md`). So sieht ein Kind auf einen
+ * Blick, welche Reihe es schon aufsagen kann und welche auch durcheinander sitzt.
+ */
+@Composable
+private fun EinmaleinsTruhen(cells: List<BadgeCell>) {
+    val jeKennung = cells.associateBy { it.category.key }
+    Row(modifier = Modifier.fillMaxWidth()) {
+        Spacer(Modifier.weight(1f))
+        for (stufe in EinmaleinsSchwierigkeitsstufe.entries) {
+            Text(
+                text = stufe.beschriftung,
+                style = MaterialTheme.typography.titleSmall,
+                textAlign = TextAlign.Center,
+                modifier = Modifier.weight(1f)
+            )
+        }
+    }
+    for (reihe in EINMALEINS_REIHEN) {
+        Row(modifier = Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
+            Text(
+                text = reihenName(reihe),
+                style = MaterialTheme.typography.titleMedium,
+                modifier = Modifier.weight(1f)
+            )
+            for (stufe in EinmaleinsSchwierigkeitsstufe.entries) {
+                val kennung = einmaleinsKennung(reihe, stufe)
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    modifier = Modifier
+                        .weight(1f)
+                        .testTag("badge_truhe_$kennung")
+                ) {
+                    val cell = jeKennung[kennung]
+                    TreasureChest(highestTier = cell?.currentTier, size = RASTER_TRUHE)
+                    val nextTier = cell?.nextTier
+                    Text(
+                        text = when {
+                            cell == null -> ""
+                            nextTier == null -> "🏆 randvoll!"
+                            else -> "noch ${nextTier.threshold - cell.ertrag}"
+                        },
+                        style = MaterialTheme.typography.labelSmall,
+                    )
+                }
+            }
         }
     }
 }

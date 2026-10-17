@@ -54,8 +54,8 @@ private val GAME_TILE_WIDTH_MAX = 210.dp
  * Die Spielauswahl der Rechnen-Insel als **vergrößerte Insel-Szene**, strukturell identisch zu
  * [ZahlenspieleMenuScreen] (dasselbe Bucht-Hintergrundbild `zahlenspiele_bay` wird bewusst
  * wiederverwendet – es ist eine neutrale Kulisse ohne zahlenspiele-spezifische Motive, siehe
- * `ASSETS.md`). Zwei Objekte: „Grundrechenarten" (führt zum bestehenden `SelectionScreen`) und
- * „Verdoppeln" und „Zahlenmauer" (führen zu ihren jeweils eigenen Selection-Screens). Neue
+ * `ASSETS.md`). Vier Objekte: „Grundrechenarten" (führt zum bestehenden `SelectionScreen`),
+ * „Verdoppeln", „Zahlenmauer" und „Einmaleins" (führen zu ihren jeweils eigenen Selection-Screens). Neue
  * Rechenspiele kommen als Eintrag in [RECHNEN_GAMES] (Daten) plus [GAME_VISUALS] (Grafik +
  * Position) hinzu.
  *
@@ -68,6 +68,7 @@ fun RechnenMenuScreen(
     onOpenGrundrechenarten: () -> Unit,
     onOpenVerdoppeln: () -> Unit,
     onOpenZahlenmauer: () -> Unit,
+    onOpenEinmaleins: () -> Unit,
     begruessungFaellig: () -> Boolean,
     onBack: () -> Unit = {},
 ) {
@@ -80,6 +81,7 @@ fun RechnenMenuScreen(
             RechenspielId.GRUNDRECHENARTEN -> onOpenGrundrechenarten()
             RechenspielId.VERDOPPELN -> onOpenVerdoppeln()
             RechenspielId.ZAHLENMAUER -> onOpenZahlenmauer()
+            RechenspielId.EINMALEINS -> onOpenEinmaleins()
         }
     }
 
@@ -147,14 +149,19 @@ private val GAME_VISUALS: Map<RechenspielId, RechenGameVisual> = mapOf(
     // "Grundrechenarten" braucht mehr Platz für die Titel-Pille, ohne die Nachbarkachel zu
     // berühren. Der Sandstrand in zahlenspiele_bay.png ist zwischen Ozean (links) und Palmen
     // (rechts) durchgehend offen, verschiebt also keine Kachel auf ein gemaltes Motiv.
+    // Mit vier Kacheln stehen sie als zwei Paare übereinander, je Paar mit demselben Abstand wie
+    // oben – darunter rückten die Titel-Pillen bei großer Anzeigegröße aneinander.
     RechenspielId.GRUNDRECHENARTEN to RechenGameVisual(
         R.drawable.game_grundrechenarten, x = 0.26f, y = 0.30f, testTag = "game_grundrechenarten"
     ),
     RechenspielId.VERDOPPELN to RechenGameVisual(
-        R.drawable.game_verdoppeln, x = 0.60f, y = 0.66f, testTag = "game_verdoppeln"
+        R.drawable.game_verdoppeln, x = 0.26f, y = 0.66f, testTag = "game_verdoppeln"
     ),
     RechenspielId.ZAHLENMAUER to RechenGameVisual(
         R.drawable.game_zahlenmauer, x = 0.82f, y = 0.30f, testTag = "game_zahlenmauer"
+    ),
+    RechenspielId.EINMALEINS to RechenGameVisual(
+        R.drawable.game_einmaleins, x = 0.82f, y = 0.66f, testTag = "game_einmaleins"
     ),
 )
 

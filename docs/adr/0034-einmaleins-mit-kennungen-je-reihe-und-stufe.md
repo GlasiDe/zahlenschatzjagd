@@ -26,6 +26,12 @@ die Reihen nacheinander einführt: Eltern können eine Reihe sperren, die noch n
   (`docs/adr/0005-persistierte-namen-entkoppelt.md`). Zu feine Kennungen lassen sich in der
   Darstellung jederzeit zusammenfassen; eine zu grobe ließe sich nie wieder aufteilen, weil die
   Historie die Reihe dann nicht festgehalten hätte.
+- **Alle 18 Kennungen rechnen im festen Zahlenraum 100**, auch die 2er-Reihe, deren größte Zahl
+  20 ist. Der Zahlenraum steht mit jeder Aufgabe in der Historie und ist damit ebenso eingefroren
+  wie die Kennung. Erwogen war das Zehnfache der Reihe (20, 30 … 100) – genauer, aber 30, 40, 60,
+  70, 80 und 90 sind keine Zahlenräume der App und kämen allein über das Einmaleins in die
+  Historie. Weil er fest ist, wirkt der Zahlenraum der Freigabe nicht aufs Einmaleins
+  (`docs/adr/0026-zahlenraum-wirkt-nur-wo-gewaehlt-wird.md`).
 - **Der Preis liegt in der Darstellung.** Der Abzeichen-Reiter „Einmaleins" trägt 18 Truhen, die
   Freigabe 18 Kästchen. Beide zeigen sie als Raster Reihe × Stufe statt als Liste.
 - **Neue Kennungen sind für bestehende Profile sofort freigegeben**

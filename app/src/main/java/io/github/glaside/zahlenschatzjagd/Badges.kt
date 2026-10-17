@@ -150,7 +150,29 @@ val BADGE_CATEGORIES = listOf(
         ranges = listOf(20, 100),
         chestLabel = "Schwer",
     ),
-)
+) + EINMALEINS_KATEGORIEN
+
+/** Das Symbol des Einmaleins: wie die Rechenart Mal mit dem Malpunkt, aber als ganze Aufgabe. */
+private const val EINMALEINS_SYMBOL = "1·1"
+
+/**
+ * Einmaleins: eine Fortschrittskennung je Reihe und Stufe, 18 insgesamt, alle im festen Zahlenraum 100
+ * (`docs/adr/0034-einmaleins-mit-kennungen-je-reihe-und-stufe.md`). Geordnet nach Reihe, darin
+ * nach Stufe – so steht im Übungsstand die 7er-Reihe aufgesagt direkt über der durcheinander.
+ * Abzeichen und Freigabe zeigen sie stattdessen als Raster Reihe × Stufe.
+ */
+private val EINMALEINS_KATEGORIEN: List<BadgeCategory>
+    get() = EINMALEINS_REIHEN.flatMap { reihe ->
+        EinmaleinsSchwierigkeitsstufe.entries.map { stufe ->
+            BadgeCategory(
+                key = einmaleinsKennung(reihe, stufe),
+                label = "Einmaleins (${reihenName(reihe)}, ${stufe.beschriftung})",
+                symbol = EINMALEINS_SYMBOL,
+                ranges = listOf(EINMALEINS_ZAHLENRAUM),
+                chestLabel = "${reihenName(reihe)} · ${stufe.beschriftung}",
+            )
+        }
+    }
 
 /**
  * Ein Reiter der Abzeichen-Übersicht (`BadgeScreen`): fasst eine oder mehrere [BADGE_CATEGORIES]
@@ -185,7 +207,11 @@ val BADGE_TABS = listOf(
         listOf("ZAHLENMAUER_LEICHT", "ZAHLENMAUER_MITTEL", "ZAHLENMAUER_SCHWER", "ZAHLENMAUER_ULTRA")
     ),
     BadgeTab("NACHBARZAHLEN", "Nachbarzahlen", "←→", listOf("NACHBARZAHLEN_LEICHT", "NACHBARZAHLEN_SCHWER")),
+    BadgeTab(EINMALEINS_TAB, "Einmaleins", EINMALEINS_SYMBOL, EINMALEINS_KATEGORIEN.map { it.key }),
 )
+
+/** Der Reiter, dessen Truhen und Kästchen als Raster Reihe × Stufe stehen statt als Liste. */
+const val EINMALEINS_TAB: String = "EINMALEINS"
 
 /**
  * Was an **einer** Schatztruhe steht. Sie muss innerhalb ihres Reiters eindeutig sein – und worin

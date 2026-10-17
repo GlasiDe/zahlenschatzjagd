@@ -1,5 +1,6 @@
 package io.github.glaside.zahlenschatzjagd.ui.parent
 
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -19,6 +20,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -27,7 +29,12 @@ import io.github.glaside.zahlenschatzjagd.BADGE_RANGES
 import io.github.glaside.zahlenschatzjagd.BADGE_TABS
 import io.github.glaside.zahlenschatzjagd.BadgeCategory
 import io.github.glaside.zahlenschatzjagd.BadgeTab
+import io.github.glaside.zahlenschatzjagd.EINMALEINS_REIHEN
+import io.github.glaside.zahlenschatzjagd.EINMALEINS_TAB
+import io.github.glaside.zahlenschatzjagd.EinmaleinsSchwierigkeitsstufe
 import io.github.glaside.zahlenschatzjagd.data.Freigabe
+import io.github.glaside.zahlenschatzjagd.einmaleinsKennung
+import io.github.glaside.zahlenschatzjagd.reihenName
 import io.github.glaside.zahlenschatzjagd.ui.util.umschaltbar
 
 /**
@@ -117,8 +124,8 @@ private fun ZahlenraumAbschnitt(freigabe: Freigabe, onSetze: (Int, Boolean) -> U
     Abschnitt("Zahlenräume")
     Text(
         text = "Der Zahlenraum gilt dort, wo das Kind ihn selbst wählt. Verdoppeln, Verliebte " +
-            "Zahlen und die Zahlenmauer rechnen in einem festen Zahlenraum – sie stellst du " +
-            "oben über ihr eigenes Kästchen ein.",
+            "Zahlen, die Zahlenmauer und das Einmaleins rechnen in einem festen Zahlenraum – " +
+            "sie stellst du oben über ihr eigenes Kästchen ein.",
         style = MaterialTheme.typography.bodySmall,
     )
     Spacer(Modifier.height(4.dp))
@@ -162,6 +169,10 @@ private fun ReiterGruppe(
     freigabe: Freigabe,
     onSetze: (String, Boolean) -> Unit,
 ) {
+    if (tab.key == EINMALEINS_TAB) {
+        EinmaleinsRaster(tab = tab, freigabe = freigabe, onSetze = onSetze)
+        return
+    }
     val kategorien = tab.categoryKeys.mapNotNull { key -> BADGE_CATEGORIES.firstOrNull { it.key == key } }
     if (kategorien.size == 1) {
         val kategorie = kategorien.single()
@@ -188,6 +199,60 @@ private fun ReiterGruppe(
             eingerueckt = true,
             onCheckedChange = { onSetze(kategorie.key, it) },
         )
+    }
+}
+
+/**
+ * Das Einmaleins: 18 Kästchen als Raster Reihe × Stufe statt als Liste – eine Zeile je Reihe, eine
+ * Spalte je Stufe (`docs/adr/0034-einmaleins-mit-kennungen-je-reihe-und-stufe.md`). So lässt sich
+ * eine Reihe sperren, die in der Schule noch nicht dran war, ohne 18 Zeilen zu lesen. Einen Hinweis
+ * auf fehlende Zahlenräume braucht es nicht: Der Zahlenraum ist fest.
+ */
+@Composable
+private fun EinmaleinsRaster(
+    tab: BadgeTab,
+    freigabe: Freigabe,
+    onSetze: (String, Boolean) -> Unit,
+) {
+    Text(
+        text = "${tab.symbol}  ${tab.label}",
+        style = MaterialTheme.typography.bodyLarge,
+        modifier = Modifier.padding(top = 8.dp, bottom = 2.dp),
+    )
+    Row(verticalAlignment = Alignment.CenterVertically) {
+        Spacer(Modifier.width(24.dp))
+        Spacer(Modifier.weight(1f))
+        for (stufe in EinmaleinsSchwierigkeitsstufe.entries) {
+            Text(
+                text = stufe.beschriftung,
+                style = MaterialTheme.typography.bodySmall,
+                modifier = Modifier.weight(1f),
+                textAlign = TextAlign.Center,
+            )
+        }
+    }
+    for (reihe in EINMALEINS_REIHEN) {
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            Spacer(Modifier.width(24.dp))
+            Text(
+                text = reihenName(reihe),
+                style = MaterialTheme.typography.bodyLarge,
+                fontSize = 16.sp,
+                modifier = Modifier.weight(1f),
+            )
+            for (stufe in EinmaleinsSchwierigkeitsstufe.entries) {
+                val kennung = einmaleinsKennung(reihe, stufe)
+                val an = kennung in freigabe.kennungen
+                Box(
+                    contentAlignment = Alignment.Center,
+                    modifier = Modifier
+                        .weight(1f)
+                        .umschaltbar(an, Role.Checkbox, "freigabe_kennung_$kennung") { onSetze(kennung, it) },
+                ) {
+                    Checkbox(checked = an, onCheckedChange = null)
+                }
+            }
+        }
     }
 }
 

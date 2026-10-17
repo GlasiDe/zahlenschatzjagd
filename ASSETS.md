@@ -239,6 +239,12 @@ Profil-Badge auf der Startkarte.
 - **Prompt:** „A small number wall pyramid built from flat sandstone bricks on the sand, three rows: the bottom row has three bricks showing the numbers 2, 3 and 4, the middle row has two bricks showing 5 and 7, the top brick shows 12, each number carved big and clear, a few scattered gold pirate coins nearby, bright cheerful children's book illustration with vivid saturated colors and bold clean outlines, friendly cartoon style for young children, on an aged parchment background, part of a matching pirate treasure map set, centered composition, soft faded edges blending into the parchment, no text“
 - **Negativ:** „text, words, letters, monochrome, grayscale, sepia, muted colors, photo, frame, border“
 
+#### `game_einmaleins.png` — Spiel-Icon „Einmaleins“
+- **Seed 7418**, gerechnet 1024×1024. `RechnenMenuScreen` und Kopf von `EinmaleinsSelectionScreen`.
+- Die 2er-Reihe als Steine, die von links nach rechts wachsen: das **Aufsagen** in Schritten. Stein statt Holzpfosten, damit es nicht wie die Pfähle bei Nachbarzahlen aussieht; ohne Rechenzeichen, weil die Reihe selbst das Motiv ist. Alle vier Seeds trafen Zahlen und Reihenfolge; 7415 und 7416 malten einen gerissenen Pergamentrand mit.
+- **Prompt:** „Five round sandstone boulders standing in a row on a sandy patch, growing bigger from left to right, the smallest stone on the left and the biggest stone on the right, each stone has one big clear number engraved deep into its front face: 2, 4, 6, 8 and 10 in this order from left to right, a few gold pirate coins next to the stones, bright cheerful children's book illustration with vivid saturated colors and bold clean outlines, friendly cartoon style for young children, on an aged parchment background, part of a matching pirate treasure map set, centered composition, soft faded edges blending into the parchment, no text“
+- **Negativ:** „text, words, letters, monochrome, grayscale, sepia, muted colors, photo, frame, border, wood, wooden posts, water, people, children“
+
 #### `game_grundrechenarten.png` — Spiel-Icon „Grundrechenarten“
 - **Seed 7405**, gerechnet 1024×1024. `RechnenMenuScreen`.
 - `+ - · :` wie im Spiel. Das gewählte Bild zeigt den Doppelpunkt korrekt; trotz Negativ-Prompt setzte Qwen aber in 2 von 4 Seeds `÷`, Kandidaten deshalb immer nachprüfen.

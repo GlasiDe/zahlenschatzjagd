@@ -305,6 +305,23 @@ class UebungsstandTest {
         )
     }
 
+    /**
+     * Das Einmaleins klappt auf eine Zeile je Kennung auf – Reihe und Stufe –, ohne Zahlenraum-Ebene,
+     * weil alle 18 im festen Zahlenraum 100 rechnen. So sieht ein Erwachsener, welche Reihe hakt.
+     */
+    @Test
+    fun einmaleinsZeigtEineZeileJeReiheUndStufe() {
+        val zeilen = baueUebungsstand(aufgaben("EINMALEINS_7_DURCHEINANDER", 10, zahlenraum = 100), jetzt)
+
+        val einmaleins = zeilen.zeile("EINMALEINS")
+        assertEquals(18, einmaleins.unterzeilen.size)
+        assertEquals("2er-Reihe · Aufsagen", einmaleins.unterzeilen.first().beschriftung)
+        assertEquals("10er-Reihe · Durcheinander", einmaleins.unterzeilen.last().beschriftung)
+        assertEquals("100 %", quotenText(zeilen.zeile("EINMALEINS_7_DURCHEINANDER")))
+        assertEquals("noch nicht geübt", quotenText(zeilen.zeile("EINMALEINS_7_AUFSAGEN")))
+        assertEquals(emptyList<Uebungsstandzeile>(), zeilen.zeile("EINMALEINS_7_AUFSAGEN").unterzeilen)
+    }
+
     /** Die leichte Stufe schiebt die schwere nicht – jede Stufe rechnet in ihrem eigenen Fenster. */
     @Test
     fun dieLeichteStufeDerNachbarzahlenRechnetNichtInDieSchwere() {

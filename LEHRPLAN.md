@@ -45,7 +45,7 @@ Zwischenstufen 10 und 50 sind didaktische Feinabstufungen, kein eigener Lehrplan
 
 Übungsformen mit eigenem Auswahl-Bildschirm bieten davon nur eine **Teilmenge** an — neue
 Werte kommen dort keine dazu. Nachbarzahlen lässt in `NachbarzahlenSelectionScreen.kt` die
-Wahl zwischen 20 und 100; Zahlenmauer und Verdoppeln geben den Zahlenraum ganz vor.
+Wahl zwischen 20 und 100; Zahlenmauer, Verdoppeln und Einmaleins geben den Zahlenraum ganz vor.
 
 ## Regeln, die `createTask` einhält (Ist-Stand)
 
@@ -79,9 +79,10 @@ Wahl zwischen 20 und 100; Zahlenmauer und Verdoppeln geben den Zahlenraum ganz v
   als z. B. bei „Verliebte Zahlen"). Zahlenraum wählbar wie bei den Rechenarten (10/20/50/100).
 - **Triviale Aufgaben reduziert:** Operanden/Ergebnisse mit 0 oder 1 werden per
   Rejection-Sampling stark seltener erzeugt (≈ 90 % Unterdrückung bei 0, ≈ 70 % bei 1),
-  aber nicht vollständig verboten. Drei Ausnahmen, jeweils dort begründet: „Verliebte
+  aber nicht vollständig verboten. Vier Ausnahmen, jeweils dort begründet: „Verliebte
   Zahlen" reduziert nur 0/Zielzahl, „Größer/Kleiner" und „Nachbarzahlen" reduzieren gar
-  nicht — dort ist eine Aufgabe mit 0 oder 1 keine triviale.
+  nicht — dort ist eine Aufgabe mit 0 oder 1 keine triviale —, und das „Einmaleins" kennt
+  keine 0 und zieht `1 · n` so oft wie jede andere Aufgabe der Reihe.
 - **Verdoppeln:** Ausgangszahl `num1 ∈ 0..10` (10 als Sonderfall bewusst eingeschlossen,
   obwohl bereits zweistellig), gesucht ist das Doppelte (`correctAnswer = num1 * 2`,
   Ergebnis 0..20). *Lehrplan-Bezug:* „Verdoppeln und halbieren" wird explizit als
@@ -256,6 +257,40 @@ das nicht liest, welche Zahl feststeht:
 | Mitte | „Hier steht die 7. Welche Zahl kommt davor? Und welche kommt danach?" |
 | links | „Hier steht die 9. Welche zwei Zahlen kommen danach?" |
 | rechts | „Hier steht die 20. Welche zwei Zahlen kommen davor?" |
+
+## Einmaleins
+
+Gezieltes Üben einzelner **Reihen** des kleinen Einmaleins, der 2er- bis 10er-Reihe, in zwei
+Schwierigkeitsstufen. *Lehrplan-Bezug:* Bereich „Zahlen und Operationen", Schwerpunkt **Schnelles
+Kopfrechnen**. Zum Ende der Schuleingangsphase: „geben die Kernaufgaben automatisiert wieder und
+leiten weitere Aufgaben des kleinen Einmaleins daraus ab"; zum Ende der Klasse 4 gesteigert zu
+„geben alle Zahlensätze des kleinen Einmaleins automatisiert wieder und leiten deren
+Umkehraufgaben sicher ab". Das automatisierte Wiedergeben ist genau das, was die Übungsform übt.
+Die Umkehraufgaben (Geteilt) bleiben bewusst Sache der Grundrechenarten.
+
+**Eine Reihe** sind die zehn Aufgaben `1 · n` bis `10 · n`; die Reihe steht immer **hinten**
+(`8 · 7`, nie `7 · 8`). Die 1er-Reihe ist nicht wählbar – sie ist Zählen, nicht Einmaleins. Alle
+Aufgaben bleiben im Zahlenraum bis 100.
+
+**Aufsagen** (leichter): die Reihe der Reihe nach, zehn leere Kästchen ohne Aufgabe davor, in die
+`7, 14, 21 …` kommen. Das ist zugleich eine Kompetenzerwartung aus dem Schwerpunkt
+**Zahlverständnis** zum Ende der Schuleingangsphase: „zählen im Zahlenraum bis 100 (vorwärts,
+rückwärts, in Schritten, beliebige Startzahl)", und unter Schnelles Kopfrechnen genauso: „zählen
+vorwärts und rückwärts in Schritten". Ein falsches Kästchen wird sofort markiert und mit der
+richtigen Zahl gefüllt, damit der Rest der Reihe darauf aufbauen kann. Eine Runde nimmt jede
+gewählte Reihe einmal, aufsteigend.
+
+**Durcheinander** (schwerer): einzelne Aufgaben `8 · 7 = _` aus allen gewählten Reihen, **ohne
+Zurücklegen** gezogen. Erst wenn alle Aufgaben der gewählten Reihen einmal dran waren, wird neu
+gemischt, und dieselbe Aufgabe kommt nie zweimal direkt hintereinander. So fragt eine Runde den
+Zahlensatz ab, ohne dass die Reihenfolge der Reihe mithilft.
+
+**Ausnahme von „Triviale Aufgaben reduziert": keine 0, keine Reduktion der 1.** `0 · n` kommt
+nicht vor, weil die Reihe beim Faktor selbst beginnt. `1 · n` wird dagegen **nicht** unterdrückt,
+anders als bei Mal in den Grundrechenarten: Beim Aufsagen ist sie der erste Schritt, ohne den
+die Reihe nicht beginnt, und beim Durcheinander gehört sie zu „alle Zahlensätze" der Reihe. Eine
+seltener gezogene `1 · n` hieße dort, dass Aufgaben der Reihe ungleich oft drankommen – gegen das
+Ziehen ohne Zurücklegen.
 
 ## Bei Erweiterung beachten
 

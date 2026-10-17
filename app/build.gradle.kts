@@ -24,7 +24,7 @@ val storeFilePath = keystoreProperties.getProperty("storeFile", "")
 // Einträge bleiben stehen, auch wenn längst neuere Versionen da sind: Wer eine Version
 // überspringt, bekommt ihren Hinweis trotzdem. Wann eine Version hierher gehört, steht in
 // docs/agents/release.md.
-val aenderungshinweiseInDerApp: Map<Int, String> = mapOf()
+val aenderungshinweiseInDerApp: Map<Int, String> = mapOf(20 to "2.1.0")
 
 android {
     namespace = "io.github.glaside.zahlenschatzjagd"

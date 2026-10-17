@@ -55,6 +55,17 @@ class UebungsformKennungenTest {
         assertEquals(emptyList<ZahlenspielId>(), sichtbareZahlenspiele(nurVerdoppelnLeicht).map { it.id })
     }
 
+    /** Schon eine einzige freigegebene Reihe in einer Stufe hält die Einmaleins-Kachel sichtbar. */
+    @Test
+    fun einmaleins_bleibtMitEinerEinzigenReiheSichtbar() {
+        val nurSiebenerAufsagen = Freigabe(kennungen = setOf("EINMALEINS_7_AUFSAGEN"), zahlenraeume = emptySet())
+
+        assertEquals(
+            listOf(RechenspielId.EINMALEINS),
+            sichtbareRechenspiele(nurSiebenerAufsagen).map { it.id },
+        )
+    }
+
     @Test
     fun ohneFreigabeBleibtKeineKachelUebrig() {
         val nichts = Freigabe(kennungen = emptySet(), zahlenraeume = emptySet())

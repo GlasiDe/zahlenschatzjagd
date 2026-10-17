@@ -24,6 +24,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import io.github.glaside.zahlenschatzjagd.BuildConfig
+import io.github.glaside.zahlenschatzjagd.EinmaleinsSchwierigkeitsstufe
 import io.github.glaside.zahlenschatzjagd.GameSettings
 import io.github.glaside.zahlenschatzjagd.NachbarzahlenSchwierigkeitsstufe
 import io.github.glaside.zahlenschatzjagd.NachbarzahlenSettings
@@ -44,6 +45,10 @@ import io.github.glaside.zahlenschatzjagd.ui.aenderungshinweis.Aenderungshinweis
 import io.github.glaside.zahlenschatzjagd.ui.aenderungshinweis.faelligeHinweiseFlow
 import io.github.glaside.zahlenschatzjagd.ui.badges.BadgeScreen
 import io.github.glaside.zahlenschatzjagd.ui.badges.BadgeViewModel
+import io.github.glaside.zahlenschatzjagd.ui.einmaleins.AufsagenScreen
+import io.github.glaside.zahlenschatzjagd.ui.einmaleins.AufsagenViewModel
+import io.github.glaside.zahlenschatzjagd.ui.einmaleins.DurcheinanderScreen
+import io.github.glaside.zahlenschatzjagd.ui.einmaleins.DurcheinanderViewModel
 import io.github.glaside.zahlenschatzjagd.ui.game.GameScreen
 import io.github.glaside.zahlenschatzjagd.ui.game.GameViewModel
 import io.github.glaside.zahlenschatzjagd.ui.home.HomeScreen
@@ -67,6 +72,7 @@ import io.github.glaside.zahlenschatzjagd.ui.parent.UebungsstandViewModel
 import io.github.glaside.zahlenschatzjagd.ui.parent.ZugangScreen
 import io.github.glaside.zahlenschatzjagd.ui.profile.ProfileScreen
 import io.github.glaside.zahlenschatzjagd.ui.profile.ProfileViewModel
+import io.github.glaside.zahlenschatzjagd.ui.selection.EinmaleinsSelectionScreen
 import io.github.glaside.zahlenschatzjagd.ui.selection.NachbarzahlenSelectionScreen
 import io.github.glaside.zahlenschatzjagd.ui.selection.RechnenMenuScreen
 import io.github.glaside.zahlenschatzjagd.ui.selection.SelectionScreen
@@ -248,6 +254,7 @@ fun ZahlenschatzjagdNavHost(
                         onOpenGrundrechenarten = { navController.navigate(Routes.SELECTION) },
                         onOpenVerdoppeln = { navController.navigate(Routes.VERDOPPELN_SELECTION) },
                         onOpenZahlenmauer = { navController.navigate(Routes.ZAHLENMAUER_SELECTION) },
+                        onOpenEinmaleins = { navController.navigate(Routes.EINMALEINS_SELECTION) },
                         begruessungFaellig = { besuchsgedaechtnis.begruessungFaellig(eintrag.id) },
                         onBack = { navController.popBackStack() }
                     )
@@ -270,6 +277,17 @@ fun ZahlenschatzjagdNavHost(
                         freigabe = freigabe,
                         onStartGame = { settings ->
                             navController.navigate(Routes.zahlenmauerGame(settings))
+                        },
+                        onBack = { navController.popBackStack() }
+                    )
+                }
+
+                composable(Routes.EINMALEINS_SELECTION) {
+                    val freigabe = aktiveFreigabe() ?: return@composable
+                    EinmaleinsSelectionScreen(
+                        freigabe = freigabe,
+                        onStartGame = { settings ->
+                            navController.navigate(einmaleinsGameRoute(settings))
                         },
                         onBack = { navController.popBackStack() }
                     )
@@ -514,6 +532,86 @@ fun ZahlenschatzjagdNavHost(
                         },
                         onBackToSelection = {
                             navController.popBackStack(Routes.NACHBARZAHLEN_SELECTION, inclusive = false)
+                        }
+                    )
+                }
+
+                composable(
+                    route = Routes.EINMALEINS_GAME,
+                    arguments = listOf(
+                        navArgument("schwierigkeitsstufe") { type = NavType.StringType },
+                        navArgument("reihen") { type = NavType.StringType },
+                        navArgument("aufgabenzahl") { type = NavType.IntType },
+                    )
+                ) { backStackEntry ->
+                    val settings = backStackEntry.toEinmaleinsSettings()
+                    val container =
+                        (LocalContext.current.applicationContext as ZahlenschatzjagdApp).container
+                    val onFinish: (Int, Int, List<UnlockedBadge>) -> Unit = { richtige, gesamt, unlocked ->
+                        navController.navigate(einmaleinsStatsRoute(richtige, gesamt, settings, unlocked)) {
+                            popUpTo(Routes.EINMALEINS_GAME) { inclusive = true }
+                        }
+                    }
+                    val onCancel: () -> Unit = {
+                        navController.popBackStack(Routes.EINMALEINS_SELECTION, inclusive = false)
+                    }
+                    // Zwei Stufen, zwei Bildschirme: Aufsagen stellt zehn Kästchen auf einmal,
+                    // Durcheinander eine Aufgabe nach der anderen.
+                    when (settings.schwierigkeitsstufe) {
+                        EinmaleinsSchwierigkeitsstufe.AUFSAGEN -> {
+                            val aufsagenViewModel: AufsagenViewModel = viewModel {
+                                AufsagenViewModel(
+                                    settings = settings,
+                                    taskRepository = container.taskRepository,
+                                    userPreferencesRepository = container.userPreferencesRepository,
+                                    rundenRepository = container.rundenRepository,
+                                )
+                            }
+                            AufsagenScreen(viewModel = aufsagenViewModel, onFinish = onFinish, onCancel = onCancel)
+                        }
+                        EinmaleinsSchwierigkeitsstufe.DURCHEINANDER -> {
+                            val durcheinanderViewModel: DurcheinanderViewModel = viewModel {
+                                DurcheinanderViewModel(
+                                    settings = settings,
+                                    taskRepository = container.taskRepository,
+                                    userPreferencesRepository = container.userPreferencesRepository,
+                                    rundenRepository = container.rundenRepository,
+                                )
+                            }
+                            DurcheinanderScreen(
+                                viewModel = durcheinanderViewModel,
+                                onFinish = onFinish,
+                                onCancel = onCancel,
+                            )
+                        }
+                    }
+                }
+
+                composable(
+                    route = Routes.EINMALEINS_STATS,
+                    arguments = listOf(
+                        navArgument("richtige") { type = NavType.IntType },
+                        navArgument("gesamt") { type = NavType.IntType },
+                        navArgument("schwierigkeitsstufe") { type = NavType.StringType },
+                        navArgument("reihen") { type = NavType.StringType },
+                        navArgument("aufgabenzahl") { type = NavType.IntType },
+                        navArgument("unlocked") { type = NavType.StringType },
+                    )
+                ) { backStackEntry ->
+                    val args = backStackEntry.arguments!!
+                    val settings = backStackEntry.toEinmaleinsSettings()
+                    StatsScreen(
+                        correct = args.getInt("richtige"),
+                        total = args.getInt("gesamt"),
+                        unlockedBadges = decodeUnlockedBadges(args.getString("unlocked") ?: "none"),
+                        onOpenBadges = { navController.navigate(Routes.BADGES) },
+                        onPlayAgain = {
+                            navController.navigate(einmaleinsGameRoute(settings)) {
+                                popUpTo(Routes.EINMALEINS_STATS) { inclusive = true }
+                            }
+                        },
+                        onBackToSelection = {
+                            navController.popBackStack(Routes.EINMALEINS_SELECTION, inclusive = false)
                         }
                     )
                 }
@@ -921,6 +1019,10 @@ internal object Routes {
     const val NACHBARZAHLEN_GAME = "nachbarzahlen_game/{schwierigkeitsstufe}/{zahlenraum}/{aufgabenzahl}"
     const val NACHBARZAHLEN_STATS =
         "nachbarzahlen_stats/{richtige}/{gesamt}/{schwierigkeitsstufe}/{zahlenraum}/{aufgabenzahl}/{unlocked}"
+    const val EINMALEINS_SELECTION = "einmaleins"
+    const val EINMALEINS_GAME = "einmaleins_game/{schwierigkeitsstufe}/{reihen}/{aufgabenzahl}"
+    const val EINMALEINS_STATS =
+        "einmaleins_stats/{richtige}/{gesamt}/{schwierigkeitsstufe}/{reihen}/{aufgabenzahl}/{unlocked}"
     const val GAME = "game/{types}/{range}/{count}/{coins}/{mc}"
     const val STATS = "stats/{correct}/{total}/{types}/{range}/{count}/{coins}/{mc}/{unlocked}"
     const val BADGES = "badges"

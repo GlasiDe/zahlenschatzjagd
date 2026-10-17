@@ -26,6 +26,15 @@ class BadgesTest {
             "ZAHLENMAUER_LEICHT", "ZAHLENMAUER_MITTEL",
             "ZAHLENMAUER_SCHWER", "ZAHLENMAUER_ULTRA",
             "NACHBARZAHLEN_LEICHT", "NACHBARZAHLEN_SCHWER",
+            "EINMALEINS_2_AUFSAGEN", "EINMALEINS_2_DURCHEINANDER",
+            "EINMALEINS_3_AUFSAGEN", "EINMALEINS_3_DURCHEINANDER",
+            "EINMALEINS_4_AUFSAGEN", "EINMALEINS_4_DURCHEINANDER",
+            "EINMALEINS_5_AUFSAGEN", "EINMALEINS_5_DURCHEINANDER",
+            "EINMALEINS_6_AUFSAGEN", "EINMALEINS_6_DURCHEINANDER",
+            "EINMALEINS_7_AUFSAGEN", "EINMALEINS_7_DURCHEINANDER",
+            "EINMALEINS_8_AUFSAGEN", "EINMALEINS_8_DURCHEINANDER",
+            "EINMALEINS_9_AUFSAGEN", "EINMALEINS_9_DURCHEINANDER",
+            "EINMALEINS_10_AUFSAGEN", "EINMALEINS_10_DURCHEINANDER",
         )
 
         val aktuell = BADGE_CATEGORIES.map { it.key }.toSet()
@@ -37,6 +46,24 @@ class BadgesTest {
             emptySet<String>(),
             verschwunden,
         )
+    }
+
+    /**
+     * Das Einmaleins rechnet in allen 18 Kennungen im festen Zahlenraum 100 – auch die 2er-Reihe.
+     * Der Wert steht in der Historie und ist damit so eingefroren wie die Kennung (ADR-0034).
+     */
+    @Test
+    fun einmaleins_hatAchtzehnKennungenImFestenZahlenraum100_ineinemReiter() {
+        val einmaleins = BADGE_CATEGORIES.filter { it.key.startsWith("EINMALEINS_") }
+
+        assertEquals(18, einmaleins.size)
+        einmaleins.forEach { assertEquals(it.key, listOf(100), it.ranges) }
+        assertEquals(
+            einmaleins.map { it.key },
+            BADGE_TABS.single { it.key == EINMALEINS_TAB }.categoryKeys,
+        )
+        val siebenerDurcheinander = einmaleins.single { it.key == "EINMALEINS_7_DURCHEINANDER" }
+        assertEquals("7er-Reihe · Durcheinander", siebenerDurcheinander.chestLabel)
     }
 
     /** Jede Kennung darf nur einmal vorkommen, sonst zählen zwei Truhen dieselben Aufgaben. */

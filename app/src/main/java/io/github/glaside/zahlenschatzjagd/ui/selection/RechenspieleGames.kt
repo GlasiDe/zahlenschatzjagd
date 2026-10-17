@@ -1,10 +1,13 @@
 package io.github.glaside.zahlenschatzjagd.ui.selection
 
+import io.github.glaside.zahlenschatzjagd.EINMALEINS_REIHEN
+import io.github.glaside.zahlenschatzjagd.EinmaleinsSchwierigkeitsstufe
 import io.github.glaside.zahlenschatzjagd.ZahlenmauerDifficulty
 import io.github.glaside.zahlenschatzjagd.data.Freigabe
+import io.github.glaside.zahlenschatzjagd.einmaleinsKennung
 
 /** Fachliche Kennung eines Spiels auf der Rechnen-Insel. */
-enum class RechenspielId { GRUNDRECHENARTEN, VERDOPPELN, ZAHLENMAUER }
+enum class RechenspielId { GRUNDRECHENARTEN, VERDOPPELN, ZAHLENMAUER, EINMALEINS }
 
 /**
  * Beschreibung eines Rechen-Spiels für die Spielauswahl – bewusst **reine Daten** ohne
@@ -46,6 +49,15 @@ val RECHNEN_GAMES: List<Rechenspiel> = listOf(
         title = "Zahlenmauer",
         spoken = "Zahlenmauer",
         kennungen = ZahlenmauerDifficulty.entries.map { it.kennung },
+    ),
+    Rechenspiel(
+        id = RechenspielId.EINMALEINS,
+        title = "Einmaleins",
+        spoken = "Einmaleins",
+        // Je Reihe, darin je Stufe – dieselbe Reihenfolge wie im Abzeichen-Katalog.
+        kennungen = EINMALEINS_REIHEN.flatMap { reihe ->
+            EinmaleinsSchwierigkeitsstufe.entries.map { einmaleinsKennung(reihe, it) }
+        },
     ),
 )
 

@@ -13,7 +13,12 @@ class RechenspieleGamesTest {
     @Test
     fun enthaeltAlleSpieleInReihenfolge() {
         assertEquals(
-            listOf(RechenspielId.GRUNDRECHENARTEN, RechenspielId.VERDOPPELN, RechenspielId.ZAHLENMAUER),
+            listOf(
+                RechenspielId.GRUNDRECHENARTEN,
+                RechenspielId.VERDOPPELN,
+                RechenspielId.ZAHLENMAUER,
+                RechenspielId.EINMALEINS,
+            ),
             RECHNEN_GAMES.map { it.id }
         )
     }

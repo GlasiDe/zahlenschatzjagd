@@ -24,6 +24,8 @@ es antippt. Jede Insel führt in einen Bereich:
   - **Verdoppeln** – leicht mit drei Antworten zur Auswahl, schwer mit dem Ziffernblock.
   - **Zahlenmauer** – jede Zelle ist die Summe der beiden darunter, in vier Stufen; in der
     höchsten wird rückwärts gerechnet.
+  - **Einmaleins** – einzelne Reihen von der 2er- bis zur 10er-Reihe, der Reihe nach aufsagen
+    oder durcheinander.
 - **Zahlenspiele**
   - **Verliebte Zahlen** – Zerlegung der 10, mit oder ohne Münzen als Hilfe.
   - **Zahlen vergleichen** – `<`, `=` oder `>`.
