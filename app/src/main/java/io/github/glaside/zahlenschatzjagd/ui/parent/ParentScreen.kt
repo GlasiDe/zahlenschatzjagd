@@ -21,8 +21,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import io.github.glaside.zahlenschatzjagd.ui.util.umschaltbar
 
 /**
  * Der Elternbereich als **Übersicht**: sechs Einträge, jeder auf einem eigenen Bildschirm.
@@ -217,18 +219,19 @@ internal fun SchalterZeile(
     onSetze: (Boolean) -> Unit,
     erklaerung: @Composable ColumnScope.() -> Unit,
 ) {
-    Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.fillMaxWidth()) {
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        modifier = Modifier
+            .fillMaxWidth()
+            .umschaltbar(an, Role.Switch, testTag, onSetze),
+    ) {
         Text(
             text = beschriftung,
             style = MaterialTheme.typography.titleMedium,
             modifier = Modifier.weight(1f),
         )
         Spacer(Modifier.width(12.dp))
-        Switch(
-            checked = an,
-            onCheckedChange = onSetze,
-            modifier = Modifier.testTag(testTag),
-        )
+        Switch(checked = an, onCheckedChange = null)
     }
     Spacer(Modifier.height(8.dp))
     Column(content = erklaerung)

@@ -9,6 +9,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -17,6 +18,7 @@ import io.github.glaside.zahlenschatzjagd.GameSettings
 import io.github.glaside.zahlenschatzjagd.data.Freigabe
 import io.github.glaside.zahlenschatzjagd.ui.theme.MapInk
 import io.github.glaside.zahlenschatzjagd.ui.util.densityScale
+import io.github.glaside.zahlenschatzjagd.ui.util.umschaltbar
 
 /** Referenzhöhe für [densityScale]: die bei normaler Anzeigegröße tatsächlich verfügbare Höhe
  * (auf einem 1080x2400-Gerät mit 420 dpi rund 830 dp, gemessen). Ist weniger Platz da - bei
@@ -99,17 +101,21 @@ fun SelectionScreen(
             Text(text = "Wähle die Rechenart:")
 
             ZweispaltigesRaster(rechenarten) { rechenart ->
-                Row(verticalAlignment = Alignment.CenterVertically) {
+                val angehakt = rechenart.type in gewaehlteArten
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    modifier = Modifier.umschaltbar(angehakt, Role.Checkbox, rechenart.testTag) { an ->
+                        gewaehlteArten = if (an) {
+                            gewaehlteArten + rechenart.type
+                        } else {
+                            gewaehlteArten - rechenart.type
+                        }
+                    }
+                ) {
                     Checkbox(
-                        checked = rechenart.type in gewaehlteArten,
-                        onCheckedChange = { angehakt ->
-                            gewaehlteArten = if (angehakt) {
-                                gewaehlteArten + rechenart.type
-                            } else {
-                                gewaehlteArten - rechenart.type
-                            }
-                        },
-                        modifier = Modifier.testTag(rechenart.testTag)
+                        checked = angehakt,
+                        onCheckedChange = null,
+                        modifier = Modifier.minimumInteractiveComponentSize()
                     )
                     Text(rechenart.label)
                 }

@@ -12,11 +12,13 @@ import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.minimumInteractiveComponentSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -26,6 +28,7 @@ import io.github.glaside.zahlenschatzjagd.BADGE_TABS
 import io.github.glaside.zahlenschatzjagd.BadgeCategory
 import io.github.glaside.zahlenschatzjagd.BadgeTab
 import io.github.glaside.zahlenschatzjagd.data.Freigabe
+import io.github.glaside.zahlenschatzjagd.ui.util.umschaltbar
 
 /**
  * Der Eintrag **Freigabe** des Elternbereichs: Was ein Kind üben darf.
@@ -213,13 +216,15 @@ private fun Schalter(
 ) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
-        modifier = Modifier.fillMaxWidth(),
+        modifier = Modifier
+            .fillMaxWidth()
+            .umschaltbar(checked, Role.Checkbox, testTag, onCheckedChange),
     ) {
         if (eingerueckt) Spacer(Modifier.width(24.dp))
         Checkbox(
             checked = checked,
-            onCheckedChange = onCheckedChange,
-            modifier = Modifier.testTag(testTag),
+            onCheckedChange = null,
+            modifier = Modifier.minimumInteractiveComponentSize(),
         )
         Column {
             Text(text = label, style = MaterialTheme.typography.bodyLarge, fontSize = 16.sp)

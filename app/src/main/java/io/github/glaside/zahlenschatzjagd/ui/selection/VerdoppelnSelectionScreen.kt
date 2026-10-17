@@ -1,13 +1,11 @@
 package io.github.glaside.zahlenschatzjagd.ui.selection
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -30,6 +28,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import io.github.glaside.zahlenschatzjagd.GameSettings
@@ -39,6 +38,7 @@ import io.github.glaside.zahlenschatzjagd.data.Freigabe
 import io.github.glaside.zahlenschatzjagd.ui.theme.MapInk
 import io.github.glaside.zahlenschatzjagd.ui.util.densityScale
 import io.github.glaside.zahlenschatzjagd.ui.util.featherEdges
+import io.github.glaside.zahlenschatzjagd.ui.util.umschaltbar
 
 private const val DEFAULT_TASK_COUNT = 10f
 private val NATURAL_CONTENT_HEIGHT = 520.dp
@@ -114,16 +114,11 @@ fun VerdoppelnSelectionScreen(
             if (stufen.size > 1) {
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.Center
+                    modifier = Modifier.umschaltbar(leicht, Role.Switch, "toggle_difficulty") { leicht = it }
                 ) {
                     Text("Leicht: Antwort auswählen")
                     Spacer(modifier = Modifier.width(12.dp))
-                    Switch(
-                        checked = leicht,
-                        onCheckedChange = { leicht = it },
-                        modifier = Modifier.testTag("toggle_difficulty")
-                    )
+                    Switch(checked = leicht, onCheckedChange = null)
                 }
             }
             Text(

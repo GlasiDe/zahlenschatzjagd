@@ -1,13 +1,11 @@
 package io.github.glaside.zahlenschatzjagd.ui.selection
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -31,6 +29,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import io.github.glaside.zahlenschatzjagd.NachbarzahlenSchwierigkeitsstufe
@@ -40,6 +39,7 @@ import io.github.glaside.zahlenschatzjagd.data.Freigabe
 import io.github.glaside.zahlenschatzjagd.ui.theme.MapInk
 import io.github.glaside.zahlenschatzjagd.ui.util.densityScale
 import io.github.glaside.zahlenschatzjagd.ui.util.featherEdges
+import io.github.glaside.zahlenschatzjagd.ui.util.umschaltbar
 
 /** Siehe [SelectionScreen]s NATURAL_CONTENT_HEIGHT: grobe Referenzhöhe für [densityScale]. */
 private val NATURAL_CONTENT_HEIGHT = 600.dp
@@ -136,24 +136,20 @@ fun NachbarzahlenSelectionScreen(
             Spacer(modifier = Modifier.height(24.dp * scale))
 
             if (stufen.size > 1) {
+                val schwer = schwierigkeitsstufe == NachbarzahlenSchwierigkeitsstufe.SCHWER
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.Center
+                    modifier = Modifier.umschaltbar(schwer, Role.Switch, "toggle_difficulty") { an ->
+                        schwierigkeitsstufe = if (an) {
+                            NachbarzahlenSchwierigkeitsstufe.SCHWER
+                        } else {
+                            NachbarzahlenSchwierigkeitsstufe.LEICHT
+                        }
+                    }
                 ) {
                     Text("Schwerer üben")
                     Spacer(modifier = Modifier.width(12.dp))
-                    Switch(
-                        checked = schwierigkeitsstufe == NachbarzahlenSchwierigkeitsstufe.SCHWER,
-                        onCheckedChange = { schwer ->
-                            schwierigkeitsstufe = if (schwer) {
-                                NachbarzahlenSchwierigkeitsstufe.SCHWER
-                            } else {
-                                NachbarzahlenSchwierigkeitsstufe.LEICHT
-                            }
-                        },
-                        modifier = Modifier.testTag("toggle_difficulty")
-                    )
+                    Switch(checked = schwer, onCheckedChange = null)
                 }
             }
             Text(

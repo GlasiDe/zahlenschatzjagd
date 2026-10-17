@@ -10,6 +10,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import io.github.glaside.zahlenschatzjagd.GameSettings
@@ -19,6 +20,7 @@ import io.github.glaside.zahlenschatzjagd.data.Freigabe
 import io.github.glaside.zahlenschatzjagd.ui.theme.MapInk
 import io.github.glaside.zahlenschatzjagd.ui.util.densityScale
 import io.github.glaside.zahlenschatzjagd.ui.util.featherEdges
+import io.github.glaside.zahlenschatzjagd.ui.util.umschaltbar
 
 private val NATURAL_CONTENT_HEIGHT = 520.dp
 
@@ -93,23 +95,24 @@ fun ZahlenspieleSelectionScreen(
 
             Spacer(modifier = Modifier.height(36.dp * scale))
 
+            val mitSchalter = hilfen.size > 1
             Row(
                 verticalAlignment = Alignment.CenterVertically,
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.Center
+                // Ist nur eine Hilfe-Stufe freigegeben, steht hier bloß ihr Name.
+                modifier = if (mitSchalter) {
+                    Modifier.umschaltbar(mitHilfe, Role.Switch, "toggle_hilfe") { mitHilfe = it }
+                } else {
+                    Modifier
+                }
             ) {
                 Text(
                     text = if (mitHilfe) "Mit Hilfe" else "Ohne Hilfe",
                     color = MapInk,
                     modifier = Modifier.testTag("hilfe_stufe")
                 )
-                if (hilfen.size > 1) {
+                if (mitSchalter) {
                     Spacer(modifier = Modifier.width(12.dp))
-                    Switch(
-                        checked = mitHilfe,
-                        onCheckedChange = { mitHilfe = it },
-                        modifier = Modifier.testTag("toggle_hilfe")
-                    )
+                    Switch(checked = mitHilfe, onCheckedChange = null)
                 }
             }
 

@@ -1,7 +1,11 @@
 package io.github.glaside.zahlenschatzjagd
 
+import androidx.compose.ui.semantics.SemanticsProperties
+import androidx.compose.ui.semantics.getOrNull
+import androidx.compose.ui.state.ToggleableState
 import androidx.compose.ui.test.assertCountEquals
 import androidx.compose.ui.test.assertIsDisplayed
+import androidx.compose.ui.test.assertIsOn
 import androidx.compose.ui.test.assertTextEquals
 import androidx.compose.ui.test.junit4.ComposeTestRule
 import androidx.compose.ui.test.junit4.createEmptyComposeRule
@@ -224,7 +228,28 @@ class FreigabeInstrumentedTest {
         composeTestRule.onNodeWithText("0-20").assertIsDisplayed()
         composeTestRule.onAllNodesWithText("0-10").assertCountEquals(0)
     }
+
+    /** Nicht nur das Kästchen, auch seine Beschriftung schaltet (#7). */
+    @Test
+    fun einTippAufDieBeschriftungSchaltetDasKaestchen() {
+        composeTestRule.oeffneElternbereichUeberDieElternfrage()
+        composeTestRule.onNodeWithTag("parent_entry_freigabe").performScrollTo().performClick()
+        composeTestRule.warteAuf("freigabe_zahlenraum_10")
+        composeTestRule.onNodeWithTag("freigabe_zahlenraum_10").performScrollTo().assertIsOn()
+
+        composeTestRule.onNodeWithText("bis 10", useUnmergedTree = true).performClick()
+        composeTestRule.warteBis { istAn("freigabe_zahlenraum_10") == false }
+
+        composeTestRule.onNodeWithText("bis 10", useUnmergedTree = true).performClick()
+        composeTestRule.warteBis { istAn("freigabe_zahlenraum_10") == true }
+    }
 }
+
+/** Der Zustand eines Kästchens; erst nach der Antwort der Datenbank aktuell. */
+private fun ComposeTestRule.istAn(testTag: String): Boolean? =
+    onAllNodesWithTag(testTag).fetchSemanticsNodes().singleOrNull()
+        ?.config?.getOrNull(SemanticsProperties.ToggleableState)
+        ?.let { it == ToggleableState.On }
 
 /** Die Kennungen der vier Grundrechenarten. */
 private val RECHENART_KENNUNGEN = setOf("PLUS", "MINUS", "MAL", "GETEILT")
