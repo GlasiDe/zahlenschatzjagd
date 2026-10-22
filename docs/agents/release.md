@@ -60,15 +60,19 @@ wenn sein Build bis auf die Signatur bitgleich ist
    Ohne `BITGLEICH` wird nicht getaggt: F-Droid würde diese Fassung nicht bauen. Die Ursache
    findet `diffoscope` (Debian-Paket `diffoscope-minimal`) zwischen beiden APKs. Wer an der
    Ursache dreht, hält sich an ADR-0033.
-8. **Taggen:** `git tag -a v<versionName> -m "<versionName> (vc <versionCode>)"`, dann
-   `git push origin v<versionName>`. **Schritt 9 unmittelbar danach:** Der Tag allein löst F-Droid
-   aus, und findet dessen Bot die APK unter der `Binaries`-Adresse noch nicht, scheitert der
-   Nachbau.
-9. **Veröffentlichen:** die APK aus Schritt 4 als `Zahlenschatzjagd-<versionName>.apk`
+8. **Release als Entwurf anlegen:** die APK aus Schritt 4 als `Zahlenschatzjagd-<versionName>.apk`
    kopieren – **ohne Datum**, denn F-Droid sucht sie über das Muster
    `Zahlenschatzjagd-%v.apk` – und
-   `gh release create v<versionName> <apk> --title "<versionName>" --notes-file <notizen.md>`.
-   Die Notizen sind der Änderungshinweis aus Schritt 1 plus die SHA-256-Prüfsumme der APK.
+   `gh release create v<versionName> <apk> --draft --title "<versionName>" --notes-file <notizen.md>`.
+   Die Notizen sind der Änderungshinweis aus Schritt 1 plus die SHA-256-Prüfsumme der APK. Ein
+   Entwurf ist nicht öffentlich und legt noch keinen Tag an.
+9. **Taggen und veröffentlichen:** `git tag -a v<versionName> <commit> -m "<versionName> (vc
+   <versionCode>)"` auf den geprüften Commit, `git push origin v<versionName>`, dann
+   `gh release edit v<versionName> --draft=false`. Der Tag allein löst F-Droid aus, und dessen Bot
+   lädt beim Nachbau die APK von der `Binaries`-Adresse. Weil der Entwurf sie schon trägt, ist sie
+   da, bevor F-Droid vom Tag erfährt. Zur Kontrolle die APK über genau diese Adresse laden und die
+   Prüfsumme vergleichen. Den Tag legen wir selbst an, nicht `gh`: So markiert er den geprüften
+   Commit und trägt seine Beschreibung.
 10. **Milestone schließen:** Ist darin noch ein Issue offen, gehört es entweder vorher erledigt
     oder in den Milestone der nächsten Version verschoben – geschlossen wird nur ein Milestone,
     dessen Issues alle geschlossen sind.
