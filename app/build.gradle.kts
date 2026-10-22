@@ -42,8 +42,8 @@ android {
         // Bei jedem verteilten Release beide erhöhen und einen Git-Tag setzen,
         // sonst ist später nicht feststellbar, was in einer APK steckt (siehe docs/agents/release.md).
         // Dazu entscheiden, ob die neue Version in aenderungshinweiseInDerApp (oben) gehört.
-        versionCode = 19
-        versionName = "2.0.3"
+        versionCode = 20
+        versionName = "2.1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
