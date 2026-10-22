@@ -99,6 +99,8 @@ class EinmaleinsFlowInstrumentedTest {
     @Test
     fun dieAbzeichenStehenAlsRasterReiheMalStufe() {
         composeTestRule.onNodeWithTag("island_abzeichen").performClick()
+        // Die Reiter stehen erst da, wenn die Datenbank geantwortet hat – darauf wartet Compose nicht.
+        composeTestRule.warteAuf("badge_tab_EINMALEINS")
         composeTestRule.onNodeWithTag("badge_tab_EINMALEINS").performScrollTo().performClick()
 
         composeTestRule.onNodeWithTag("badge_truhe_EINMALEINS_2_AUFSAGEN").assertIsDisplayed()

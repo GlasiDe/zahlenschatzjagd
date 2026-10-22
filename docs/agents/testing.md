@@ -42,6 +42,10 @@ ohne die das `imePadding()` im `ZahlenschatzjagdNavHost` auf Android vor 11 wirk
   `advanceUntilIdle` einen davon abhängigen Zustand nicht voran. Auf die erste echte Antwort
   warten (`first { … }`). Hängt der Zustand zusätzlich an `stateIn(…, WhileSubscribed)`, muss
   im Test jemand mitlesen — ohne Sammler bleibt es beim Startwert.
+- **Auch in instrumentierten Tests wartet Compose nicht auf Datenbank und DataStore.** Was erst
+  nach deren Antwort gezeichnet wird – die Reiter der Abzeichen, fast alles im Elternbereich –,
+  braucht vor dem ersten Zugriff ein `warteAuf(…)`. Ohne es ist der Test mal grün, mal rot; beim
+  Abzeichen-Bildschirm fiel das erst auf, als das Einmaleins 18 Abfragen dazubrachte.
 - **Persistiertes Format wird gegen von Hand geschriebene Daten geprüft**, nie im
   Reihum-Verfahren. Ein Reihum-Test bemerkt eine Umbenennung nicht, weil Schreiber und Leser
   gemeinsam mitwandern. Gilt für das Sicherungsformat wie für die Fortschrittskennungen —

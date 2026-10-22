@@ -87,6 +87,8 @@ class HomeNavigationInstrumentedTest {
     @Test
     fun abzeichenInsel_verdoppelnReiterZeigtLeichteUndSchwereTruheGetrennt() {
         composeTestRule.onNodeWithTag("island_abzeichen").performClick()
+        // Die Reiter stehen erst da, wenn die Datenbank geantwortet hat – darauf wartet Compose nicht.
+        composeTestRule.warteAuf("badge_tab_VERDOPPELN")
         // Der Reiter liegt im ScrollableTabRow zunächst außerhalb des sichtbaren Bereichs
         // und muss erst ins Bild gescrollt werden, sonst landet der Klick daneben.
         composeTestRule.onNodeWithTag("badge_tab_VERDOPPELN").performScrollTo().performClick()
